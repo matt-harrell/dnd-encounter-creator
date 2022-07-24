@@ -7,6 +7,7 @@ import {
   failedToLoadMonster,
   
 } from "../../features/MonsterCardSlice";
+import { AppDispatch } from "../../app/store";
 
 
 // fetch('https://www.dnd5eapi.co/api/monsters/adult-black-dragon')
@@ -14,7 +15,7 @@ import {
 //   .then(data => console.log(data.name));
 
 const MonsterCard = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const monsterCardContent = useSelector(selectMonsterCard);
 
   useEffect(() =>{
