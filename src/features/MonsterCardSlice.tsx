@@ -1,9 +1,11 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadMonster:any = createAsyncThunk(
+export const loadMonster = createAsyncThunk(
     'MonsterCard/loadMonster',
    async () => {
         const response = await fetch(`https://www.dnd5eapi.co/api/monsters/adult-black-dragon`);
+        // example of query above
+        // const response = await fetch(`https://www.dnd5eapi.co/api/monsters?name=owl`);
         const monster = await response.json();
         return monster.name; 
    }
@@ -39,7 +41,7 @@ export const MonsterCardSlice = createSlice({
         })
     }
 })
-
+// neeed to fix any type check
 export const selectMonsterCard = (state:any) => state.MonsterCard;
 export const isMonsterLoading = (state:any) => state.isMonsterLoading;
 export const failedToLoadMonster = (state:any) => state.failedToLoadMonster;
