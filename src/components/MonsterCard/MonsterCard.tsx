@@ -18,16 +18,13 @@ const MonsterCard = () => {
   const dispatch = useDispatch<AppDispatch>();
   const monsterCardContent = useSelector(selectMonsterCard);
 
-  useEffect(() =>{
-    // if(monsterCardContent == ""){
-      dispatch(loadMonster())
-    // }
-  })
+  
 
 
     return (
         <div>
-            {monsterCardContent.monsterContent}
+            <div>{monsterCardContent.name}</div>
+            <div>{monsterCardContent.alignment}</div>
         </div>
     );
 }

@@ -2,12 +2,11 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loadMonster = createAsyncThunk(
     'MonsterCard/loadMonster',
-   async () => {
-        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/adult-black-dragon`);
-        // example of query above
-        // const response = await fetch(`https://www.dnd5eapi.co/api/monsters?name=owl`);
+   async (searchMonster:string) => {
+        const formatedMonster = searchMonster.replaceAll(' ','-').toLowerCase();
+        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/${formatedMonster}`);
         const monster = await response.json();
-        return monster.name; 
+        return monster; 
    }
 );
 
@@ -16,7 +15,7 @@ export const loadMonster = createAsyncThunk(
 export const MonsterCardSlice = createSlice({
     name:'MonsterCard',
     initialState:{
-        monsterContent:'',
+        monsterContent:{},
         isMonsterLoading:false,
         failedToLoadMonster:false,
     },
@@ -42,7 +41,7 @@ export const MonsterCardSlice = createSlice({
     }
 })
 // neeed to fix any type check
-export const selectMonsterCard = (state:any) => state.MonsterCard;
+export const selectMonsterCard = (state:any) => state.MonsterCard.monsterContent;
 export const isMonsterLoading = (state:any) => state.isMonsterLoading;
 export const failedToLoadMonster = (state:any) => state.failedToLoadMonster;
 

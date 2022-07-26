@@ -12,12 +12,14 @@ export const loadMonsterList = createAsyncThunk(
 )
 
 interface monsterListState{
-    monsterListState?:string[] | [] | string,
+    // searchedMonster:string,
+    monsterListState?:string[] | [],
     isMonsterListLoading:boolean,
     failedToLoadMonsterList:boolean,
 }
 
 const initialState:monsterListState = {
+    // searchedMonster:'',
     monsterListState:[],
     isMonsterListLoading:false,
     failedToLoadMonsterList:false,
@@ -32,6 +34,7 @@ export const SearchMonsterListSlice = createSlice({
         .addCase(loadMonsterList.pending,(state) =>{
             state.isMonsterListLoading = true;
             state.failedToLoadMonsterList = false;
+            state.monsterListState = [];
         })
         .addCase(loadMonsterList.rejected,(state) =>{
             state.isMonsterListLoading = false;
