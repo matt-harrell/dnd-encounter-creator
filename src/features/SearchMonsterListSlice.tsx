@@ -48,7 +48,7 @@ export const SearchMonsterListSlice = createSlice({
     }
 })
 
-export const selectSearchMonsterList = (state:any) => state.SearchMonsterList;
+export const selectSearchMonsterList = (state:any) => state.SearchMonsterList.monsterListState;
 export const isMonsterListLoading = (state:any) => state.isMonsterListLoading;
 export const failedToLoadMonsterList = (state:any) => state.failedToLoadMonsterList;
 

@@ -1,5 +1,4 @@
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
 import {
   selectMonsterCard,
   loadMonster,
@@ -8,11 +7,8 @@ import {
   
 } from "../../features/MonsterCardSlice";
 import { AppDispatch } from "../../app/store";
+import { Grid,Typography,Box } from "@mui/material";
 
-
-// fetch('https://www.dnd5eapi.co/api/monsters/adult-black-dragon')
-//   .then(response => response.json())
-//   .then(data => console.log(data.name));
 
 const MonsterCard = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,10 +18,16 @@ const MonsterCard = () => {
 
 
     return (
-        <div>
-            <div>{monsterCardContent.name}</div>
-            <div>{monsterCardContent.alignment}</div>
-        </div>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} sx={{textAlign:'left'}}>
+            <Typography>Monster Name</Typography>
+            <Typography>Monster alinment</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6} sx={{textAlign:'left'}}>
+            <Typography>Monster Name</Typography>
+            <Typography>Monster alinment</Typography>
+          </Grid>
+        </Grid>
     );
 }
 
