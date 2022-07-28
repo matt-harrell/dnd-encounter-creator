@@ -7,7 +7,6 @@ import { Grid, } from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
       <Grid container spacing={2} sx={{paddingY:5}}>
         <Grid item xs={12}>
           <SearchBar />
@@ -16,7 +15,6 @@ function App() {
           <MonsterCard />
         </Grid>
       </Grid>
-    </div>
   );
 }
 
