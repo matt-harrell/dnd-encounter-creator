@@ -13,6 +13,8 @@ import { Grid,Typography,Box } from "@mui/material";
 const MonsterCard = () => {
   const dispatch = useDispatch<AppDispatch>();
   const monsterCardContent = useSelector(selectMonsterCard);
+  let speedString = '';
+
 
   // condioanl logic to render speed for testing needs to be deleted after done
   if (monsterCardContent.speed === undefined) {
@@ -24,10 +26,8 @@ const MonsterCard = () => {
     } else{
       speedType.push(`${moveType} ${monsterCardContent.speed[moveType]}`)
     }
-    console.log(speedType)
-    // map array to add commas after each except to last element 
+     speedString = speedType.join();
   }
-
   
   
   
@@ -43,6 +43,7 @@ const MonsterCard = () => {
             <Box>
             <Typography component={'p'} variant={'body1'}>Armor Class{`armor_class`}</Typography>
             <Typography component={'p'} variant={'body1'}>Hit Points {`hit_points`} ({`hit_dice`})</Typography>
+            <Typography>Speed:</Typography>
             </Box>
             <hr />
             <Grid container spacing={1}>

@@ -50,11 +50,17 @@ const SearchBar = () => {
       }
     }, [open]);
 
-    const handleChange = (e:any, searchedMonster:string | null) => {
+    const handleChange = async (e:any, searchedMonster:string | null) => {
       setSearchedMonster(searchedMonster);
 
       if (searchedMonster !== null) {
-        dispatch(loadMonster(searchedMonster))
+        try {
+          dispatch(loadMonster(searchedMonster)).unwrap()
+        } catch (rejectedValueOrSerializedError) {
+          console.log(rejectedValueOrSerializedError)
+        }
+
+        
       }
 
     }
