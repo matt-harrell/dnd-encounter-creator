@@ -54,23 +54,39 @@ export const loadMonster = createAsyncThunk(
         
        })
 
+        let speedString = '';
+        let speedType:string[] = [];
+        for (const moveType in monster.speed)
+        if (moveType === 'walk'){
+          speedType.push(monster.speed[moveType])
+        } else{
+          speedType.push(`${moveType} ${monster.speed[moveType]}`)
+        }
+        speedString = speedType.join();
+
+
         return {
             ...monster,
-            statMods 
+            statMods,
+            speedString 
         } 
    }
 );
 
 
 
-export const MonsterCardSlice = createSlice({
+export const MonsterCardSlice:any = createSlice({
     name:'MonsterCard',
     initialState:{
+        showMonsterCard:false,
         monsterContent:{},
         isMonsterLoading:false,
         failedToLoadMonster:false,
     },
     reducers:{
+        setShowMonsterCard:(state,action) => {
+            state.showMonsterCard = action.payload
+        }
 
     },
     extraReducers: (builder) => {
@@ -87,12 +103,17 @@ export const MonsterCardSlice = createSlice({
             state.isMonsterLoading = false;
             state.failedToLoadMonster = false;
             state.monsterContent = action.payload;
+            state.showMonsterCard = true;
 
         })
     }
 })
 // neeed to fix any type check
 export const selectMonsterCard = (state:any) => state.MonsterCard.monsterContent;
+export const showMonsterCard = (state:any) => state.MonsterCard.showMonsterCard;
+
+export const {setShowMonsterCard} = MonsterCardSlice.actions;
+
 export const isMonsterLoading = (state:any) => state.isMonsterLoading;
 export const failedToLoadMonster = (state:any) => state.failedToLoadMonster;
 

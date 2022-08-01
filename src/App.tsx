@@ -12,7 +12,7 @@ function App() {
           <SearchBar />
         </Grid>
         <Grid item xs={12}>
-          <MonsterCard />
+         <MonsterCard/>
         </Grid>
       </Grid>
   );

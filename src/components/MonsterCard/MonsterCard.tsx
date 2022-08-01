@@ -1,43 +1,25 @@
 import { useDispatch,useSelector } from "react-redux";
 import {
   selectMonsterCard,
-  loadMonster,
-  isMonsterLoading,
-  failedToLoadMonster,
-  
+  showMonsterCard,  
 } from "../../features/MonsterCardSlice";
 import { AppDispatch } from "../../app/store";
 import { Grid,Typography,Box } from "@mui/material";
+import { useEffect, useState } from "react";
+
 
 
 const MonsterCard = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const monsterCardContent = useSelector(selectMonsterCard);
-  let speedString = '';
-
-
-  // condioanl logic to render speed for testing needs to be deleted after done
-  if (monsterCardContent.speed === undefined) {
-  } else {
-    let speedType:string[] = [];
-    for (const moveType in monsterCardContent.speed)
-    if (moveType === 'walk'){
-      speedType.push(monsterCardContent.speed[moveType])
-    } else{
-      speedType.push(`${moveType} ${monsterCardContent.speed[moveType]}`)
-    }
-     speedString = speedType.join();
-  }
-  
-  
-  
-  
-
+  const monster = useSelector(selectMonsterCard);
+  const showMonster = useSelector(showMonsterCard);    
 
     return (
-        <Grid container spacing={2}>
+      <div>
+        {showMonster && (
+          <Grid container spacing={2}>
           <Grid item xs={12} sm={6} sx={{textAlign:'left'}}>
-            <Typography component={'h2'} variant={'h3'}>Monster Name</Typography>
+            <Typography component={'h2'} variant={'h3'}>{monster.name}</Typography>
             <Typography component={'p'} variant={'body1'}>{`size`} {`type`} {`alighnment`}</Typography>
             <hr />
             <Box>
@@ -78,6 +60,12 @@ const MonsterCard = () => {
             <Typography>Monster alinment</Typography>
           </Grid>
         </Grid>
+        )}
+      </div>
+      
+     
+        
+        
     );
 }
 
