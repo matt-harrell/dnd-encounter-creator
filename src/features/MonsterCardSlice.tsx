@@ -1,5 +1,15 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
+
+interface profType {
+    value:number,
+    proficiency:{
+      index:string,
+      name:string,
+      url:string
+    }
+  }
+
 export const loadMonster = createAsyncThunk(
     'MonsterCard/loadMonster',
    async (searchMonster:string) => {
@@ -56,19 +66,38 @@ export const loadMonster = createAsyncThunk(
 
         let speedString = '';
         let speedType:string[] = [];
-        for (const moveType in monster.speed)
+        for (const moveType in monster.speed){
         if (moveType === 'walk'){
           speedType.push(monster.speed[moveType])
         } else{
           speedType.push(`${moveType} ${monster.speed[moveType]}`)
         }
+        }
         speedString = speedType.join();
+
+        const savingThrows = monster.proficiencies.filter((prof:profType) => prof.proficiency.name.includes('Saving Throw'));
+        const skills = monster.proficiencies.filter((prof:profType) => prof.proficiency.name.includes('Skill'));
+
+        let senseString = '';
+        let sensesArray:string[] = [];
+        for (const sense in monster.senses){
+            sensesArray.push(`${sense.replace('_',' ')} ${monster.senses[sense]}`)
+        }
+        
+        senseString = sensesArray.join();
+
+        if(monster.reactions === undefined){
+            monster.reactions = [];
+        }
 
 
         return {
             ...monster,
             statMods,
-            speedString 
+            speedString,
+            savingThrows,
+            skills,
+            senseString
         } 
    }
 );
@@ -86,7 +115,8 @@ export const MonsterCardSlice:any = createSlice({
     reducers:{
         setShowMonsterCard:(state,action) => {
             state.showMonsterCard = action.payload
-        }
+        },
+
 
     },
     extraReducers: (builder) => {
