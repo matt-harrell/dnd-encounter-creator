@@ -144,7 +144,6 @@ export const showMonsterCard = (state:any) => state.MonsterCard.showMonsterCard;
 
 export const {setShowMonsterCard} = MonsterCardSlice.actions;
 
-export const isMonsterLoading = (state:any) => state.isMonsterLoading;
-export const failedToLoadMonster = (state:any) => state.failedToLoadMonster;
+
 
 export default MonsterCardSlice.reducer;
