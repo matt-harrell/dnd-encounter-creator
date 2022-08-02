@@ -7,12 +7,13 @@ import {
     loadMonsterList,
     selectSearchMonsterList,
 } from '../../../features/SearchMonsterListSlice';
-import { loadMonster } from '../../../features/MonsterCardSlice';
+import { loadMonster,setShowMonsterCard,showMonsterCard } from '../../../features/MonsterCardSlice';
 import { AppDispatch } from '../../../app/store';
 
 const SearchBar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const searchMonsterList = useSelector(selectSearchMonsterList);
+    const showMonsterCardContent = useSelector(showMonsterCard);
     const [searchedMonster,setSearchedMonster] = useState<string | null>(searchMonsterList[0]|| null);
     const [inputValue, setInputValue] = useState('');
 
@@ -50,11 +51,17 @@ const SearchBar = () => {
       }
     }, [open]);
 
-    const handleChange = (e:any, searchedMonster:string | null) => {
+    const handleChange = async (e:any, searchedMonster:string | null) => {
       setSearchedMonster(searchedMonster);
 
       if (searchedMonster !== null) {
-        dispatch(loadMonster(searchedMonster))
+        try {
+          dispatch(loadMonster(searchedMonster)).unwrap()
+        } catch (rejectedValueOrSerializedError) {
+          console.log(rejectedValueOrSerializedError)
+        }        
+      }else {
+        dispatch(setShowMonsterCard(false))
       }
 
     }
