@@ -133,7 +133,6 @@ export const MonsterCardSlice:any = createSlice({
             state.isMonsterLoading = false;
             state.failedToLoadMonster = false;
             state.monsterContent = action.payload;
-            state.showMonsterCard = true;
 
         })
     }

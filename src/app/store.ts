@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import MonsterCardReducer from '../features/MonsterCardSlice';
 import SearchMonsterListReducer from '../features/SearchMonsterListSlice';
+import encounterSliceReducer from '../features/encounterSlice';
 
 export const store = configureStore({
   reducer: {
     MonsterCard:MonsterCardReducer,
     SearchMonsterList:SearchMonsterListReducer,
+    Ecounter:encounterSliceReducer,
   },
 });
 
