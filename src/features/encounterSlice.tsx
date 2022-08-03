@@ -10,14 +10,14 @@ import { createSlice } from "@reduxjs/toolkit";
 // everytime a monster is added, the exp counter at the bottom should go up
 // this will later be used to subtract exp from players that are added
 
-interface monster{
+ export interface monsterType{
     name:string;
     challenge_rating:number;
     xp:number; 
 }
 
 interface EncounterState {
-    listOfMonsters:monster[];
+    listOfMonsters:monsterType[];
     encounterExp:number;
 }
 
@@ -49,8 +49,8 @@ const encounterSlice = createSlice({
 
 })
 
-export const selectlistOfMonsters = (state: { encounter: { listOfMonsters: monster[]; }; }) => state.encounter.listOfMonsters;
-export const selectencounterExp = (state: { encounter: { encounterExp: number; }; }) => state.encounter.encounterExp;
+export const selectListOfMonsters = (state: { encounter: { listOfMonsters: monsterType[]; }; }) => state.encounter.listOfMonsters;
+export const selectEncounterExp = (state: { encounter: { encounterExp: number; }; }) => state.encounter.encounterExp;
 
 export const {addMonster,removeMonster,decrementXP,incrementXP} = encounterSlice.actions;
 
