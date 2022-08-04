@@ -7,6 +7,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // monsters will be added from the search bar component
 // players will be able to remove a monster by clicked on monster 
 // user will be able to click on a monster the see their statblock from the monster card comoponet
+// IMPORTANT have the loadmonster in searchbar and monstercardslice run once log data in array then call array[index of clicked item] to populate the monster card instead of calling database again 
 // everytime a monster is added, the exp counter at the bottom should go up
 // this will later be used to subtract exp from players that are added
 
@@ -17,7 +18,7 @@ import { createSlice } from "@reduxjs/toolkit";
 }
 
 interface EncounterState {
-    listOfMonsters:monsterType[];
+    listOfMonsters:any[];
     encounterExp:number;
 }
 
@@ -32,9 +33,10 @@ const encounterSlice = createSlice({
     reducers: {
         addMonster(state,action){
             state.listOfMonsters.push(action.payload)
+            // push all of monster data from database instead of just 3 properties then use array for monster card instead of calling database again
         },
         removeMonster(state,action){
-           const monsterToBeRemoved = state.listOfMonsters.indexOf(action.payload);
+           const monsterToBeRemoved = action.payload;
            if (monsterToBeRemoved > -1){
             state.listOfMonsters.splice(monsterToBeRemoved,1);
            }
@@ -49,7 +51,7 @@ const encounterSlice = createSlice({
 
 })
 
-export const selectListOfMonsters = (state: { encounter: { listOfMonsters: monsterType[]; }; }) => state.encounter.listOfMonsters;
+export const selectListOfMonsters = (state: { encounter: { listOfMonsters: any[]; }; }) => state.encounter.listOfMonsters;
 export const selectEncounterExp = (state: { encounter: { encounterExp: number; }; }) => state.encounter.encounterExp;
 
 export const {addMonster,removeMonster,decrementXP,incrementXP} = encounterSlice.actions;

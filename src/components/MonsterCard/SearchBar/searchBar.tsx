@@ -59,15 +59,7 @@ const SearchBar = () => {
       if (searchedMonster !== null){
         try {
           const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
-          dispatch(
-                addMonster(
-                    {
-                      name:monster.name, 
-                      challenge_rating:monster.challenge_rating,
-                      xp:monster.xp 
-                    }
-                  )
-              )
+          dispatch(addMonster(monster))
           dispatch(incrementXP(monster.xp))          
           
         } catch (rejectedValueOrSerializedError) {
@@ -97,6 +89,7 @@ const SearchBar = () => {
         open={open}
         onOpen={() => {
           setOpen(true);
+          dispatch(setShowMonsterCard(false))
         }}
         onClose={() => {
           setOpen(false);
