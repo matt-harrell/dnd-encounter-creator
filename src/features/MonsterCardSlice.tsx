@@ -108,7 +108,6 @@ export const MonsterCardSlice:any = createSlice({
     name:'MonsterCard',
     initialState:{
         showMonsterCard:false,
-        monsterData:{},
         monsterContent:{},
         isMonsterLoading:false,
         failedToLoadMonster:false,
@@ -136,8 +135,6 @@ export const MonsterCardSlice:any = createSlice({
         .addCase(loadMonster.fulfilled, (state,action) => {
             state.isMonsterLoading = false;
             state.failedToLoadMonster = false;
-            state.monsterData = action.payload;
-
         })
     }
 })
