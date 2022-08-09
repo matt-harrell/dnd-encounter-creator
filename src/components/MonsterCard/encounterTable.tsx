@@ -1,16 +1,14 @@
-import { Grid,Typography, Box, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { click } from "@testing-library/user-event/dist/types/setup/directApi";
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectListOfMonsters, selectEncounterExp, monsterType, removeMonster, decrementXP } from "../../features/encounterSlice";
+import { selectListOfMonsters, removeMonster, calcEncoutnerXP } from "../../features/encounterSlice";
 import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../../features/MonsterCardSlice";
 
 
 const EcounterTable = () => {
     const monsterList = useSelector(selectListOfMonsters);
-    const encounterExp = useSelector(selectEncounterExp);
-    const showMonster = useSelector(showMonsterCard)
+    const showMonster = useSelector(showMonsterCard);
     // console.log(monsterList);
     const dispatch = useDispatch();
     const handleViewClick = (index:number) => (e:any) =>{
@@ -21,8 +19,8 @@ const EcounterTable = () => {
         if(showMonster){
             dispatch(setShowMonsterCard(false))
         }
-        dispatch(decrementXP(monsterList[index].xp))
         dispatch(removeMonster(index))
+        dispatch(calcEncoutnerXP()) 
     }
     
 
