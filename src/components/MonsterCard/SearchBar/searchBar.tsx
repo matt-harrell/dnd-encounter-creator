@@ -88,6 +88,7 @@ const SearchBar = () => {
         open={open}
         onOpen={() => {
           setOpen(true);
+          setSearchedMonster(null);
           dispatch(setShowMonsterCard(false))
         }}
         onClose={() => {
