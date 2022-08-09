@@ -8,15 +8,14 @@ import {
     loadMonsterList,
     selectSearchMonsterList,
 } from '../../../features/SearchMonsterListSlice';
-import { loadMonster,setShowMonsterCard,showMonsterCard } from '../../../features/MonsterCardSlice';
-import { addMonster, incrementXP } from '../../../features/encounterSlice';
+import { loadMonster,setShowMonsterCard } from '../../../features/MonsterCardSlice';
+import { addMonster, calcEncoutnerXP } from '../../../features/encounterSlice';
 
 import { AppDispatch } from '../../../app/store';
 
 const SearchBar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const searchMonsterList = useSelector(selectSearchMonsterList);
-    const showMonsterCardContent = useSelector(showMonsterCard);
     const [searchedMonster,setSearchedMonster] = useState<string | null>(searchMonsterList[0]|| null);
     const [inputValue, setInputValue] = useState('');
 
@@ -59,8 +58,8 @@ const SearchBar = () => {
       if (searchedMonster !== null){
         try {
           const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
-          dispatch(addMonster(monster))
-          dispatch(incrementXP(monster.xp))          
+          dispatch(addMonster(monster)) 
+          dispatch(calcEncoutnerXP())        
           
         } catch (rejectedValueOrSerializedError) {
           console.log(rejectedValueOrSerializedError)
