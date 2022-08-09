@@ -116,6 +116,9 @@ export const MonsterCardSlice:any = createSlice({
         setShowMonsterCard:(state,action) => {
             state.showMonsterCard = action.payload
         },
+        setMonsterCardContent(state,action){
+            state.monsterContent = action.payload;
+        }
 
 
     },
@@ -132,9 +135,6 @@ export const MonsterCardSlice:any = createSlice({
         .addCase(loadMonster.fulfilled, (state,action) => {
             state.isMonsterLoading = false;
             state.failedToLoadMonster = false;
-            state.monsterContent = action.payload;
-            state.showMonsterCard = true;
-
         })
     }
 })
@@ -142,9 +142,8 @@ export const MonsterCardSlice:any = createSlice({
 export const selectMonsterCard = (state:any) => state.MonsterCard.monsterContent;
 export const showMonsterCard = (state:any) => state.MonsterCard.showMonsterCard;
 
-export const {setShowMonsterCard} = MonsterCardSlice.actions;
+export const {setShowMonsterCard, setMonsterCardContent} = MonsterCardSlice.actions;
 
-export const isMonsterLoading = (state:any) => state.isMonsterLoading;
-export const failedToLoadMonster = (state:any) => state.failedToLoadMonster;
+
 
 export default MonsterCardSlice.reducer;

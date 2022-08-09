@@ -3,17 +3,19 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+
 import { 
     loadMonsterList,
     selectSearchMonsterList,
 } from '../../../features/SearchMonsterListSlice';
-import { loadMonster,setShowMonsterCard,showMonsterCard } from '../../../features/MonsterCardSlice';
+import { loadMonster,setShowMonsterCard } from '../../../features/MonsterCardSlice';
+import { addMonster, calcEncoutnerXP } from '../../../features/encounterSlice';
+
 import { AppDispatch } from '../../../app/store';
 
 const SearchBar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const searchMonsterList = useSelector(selectSearchMonsterList);
-    const showMonsterCardContent = useSelector(showMonsterCard);
     const [searchedMonster,setSearchedMonster] = useState<string | null>(searchMonsterList[0]|| null);
     const [inputValue, setInputValue] = useState('');
 
@@ -53,16 +55,28 @@ const SearchBar = () => {
 
     const handleChange = async (e:any, searchedMonster:string | null) => {
       setSearchedMonster(searchedMonster);
-
-      if (searchedMonster !== null) {
+      if (searchedMonster !== null){
         try {
-          dispatch(loadMonster(searchedMonster)).unwrap()
+          const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
+          dispatch(addMonster(monster)) 
+          dispatch(calcEncoutnerXP())        
+          
         } catch (rejectedValueOrSerializedError) {
           console.log(rejectedValueOrSerializedError)
-        }        
-      }else {
-        dispatch(setShowMonsterCard(false))
+        }
       }
+
+
+      // this is old logic when trying to pull up just monster card
+      // if (searchedMonster !== null) {
+      //   try {
+      //     dispatch(loadMonster(searchedMonster)).unwrap()
+      //   } catch (rejectedValueOrSerializedError) {
+      //     console.log(rejectedValueOrSerializedError)
+      //   }        
+      // }else {
+      //   dispatch(setShowMonsterCard(false))
+      // }
 
     }
 
@@ -74,6 +88,8 @@ const SearchBar = () => {
         open={open}
         onOpen={() => {
           setOpen(true);
+          setSearchedMonster(null);
+          dispatch(setShowMonsterCard(false))
         }}
         onClose={() => {
           setOpen(false);

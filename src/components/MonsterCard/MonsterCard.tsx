@@ -1,11 +1,9 @@
-import { useDispatch,useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectMonsterCard,
   showMonsterCard,  
 } from "../../features/MonsterCardSlice";
-import { AppDispatch } from "../../app/store";
 import { Grid,Typography,Box } from "@mui/material";
-import { useEffect, useState } from "react";
 
 
 interface profType {
@@ -41,7 +39,6 @@ interface actionType{
 
 
 const MonsterCard = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const monster = useSelector(selectMonsterCard);
   const {
           name,
@@ -188,26 +185,21 @@ const MonsterCard = () => {
             {special_abilities.length !== 0 && (
                 <Box>
                   {special_abilities.map((ability:abilityType,index:number) => {
-                    if(ability.usage === undefined){
+                    if(ability.usage === undefined) {
                       return <Typography component={'p'} key={index}><b>{ability.name}:</b> {ability.desc}</Typography>
                     } else{
                       switch (ability.usage.type) {
                         case 'per day':
                           return <Typography component={'p'} key={index}><b>{ability.name} ({ability.usage.times} {ability.usage.type}):</b> {ability.desc}</Typography>
-                          break;
                         case 'at will':
                           return <Typography component={'p'} key={index}><b>{ability.name} ({ability.usage.type}):</b>{ability.desc}</Typography>
-                          break;
                         case 'recharge after rest':
                           return <Typography component={'p'} key={index}><b>{ability.name} ({ability.usage.type}):</b>{ability.desc}</Typography>
-                          break;
                         case 'recharge on roll':
                           return <Typography component={'p'} key={index}><b>{ability.name} ({ability.usage.type} {ability.usage.times}):</b> {ability.desc}</Typography>
-                          break;
                         default:                          
-                          break;
+                          return null;
                       }
-                       
                     }     
                   })}
                 </Box>
@@ -227,18 +219,14 @@ const MonsterCard = () => {
                       switch (action.usage.type) {
                         case 'recharge on roll':
                           return <Typography component={'p'} key={index}><b>{action.name} ({action.usage.type} of at least {action.usage.min_value}({action.usage.dice})):</b> {action.desc}</Typography>
-                          break;
                         case 'per day':
                           return <Typography component={'p'} key={index}><b>{action.name} ({action.usage.times} {action.usage.type}):</b> {action.desc}</Typography>
-                          break;
                         case 'at will':
                           return <Typography component={'p'} key={index}><b>{action.name} ({action.usage.type}):</b>{action.desc}</Typography>
-                          break;
                         case 'recharge after rest':
                           return <Typography component={'p'} key={index}><b>{action.name} ({action.usage.type}):</b>{action.desc}</Typography>
-                          break;
                         default:                          
-                          break;
+                          return null;
                       }
                        
                     }     
