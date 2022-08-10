@@ -63,7 +63,7 @@ const playersSlice = createSlice({
 })
 
 export const selectPlayers = (state: { players: { players: player[]; }; }) => state.players.players;
-export const selectLevels = (state: { players: { levels: number; }; }) => state.players.levels;
+export const selectLevels = (state: { players: { levels: number[]; }; }) => state.players.levels;
 
 export const {addPlayer} = playersSlice.actions;
 
