@@ -45,6 +45,7 @@ const playersSlice = createSlice({
             let playerlevel: keyof typeof XPThreshholds;
             for (playerlevel in XPThreshholds) {
                 if(Number(playerlevel) === addedPlayer.level){
+                    console.log('sucess!') // tell when if statement is sucessful
                     const { easy,medium, hard, deadly} = XPThreshholds[playerlevel];
                     addedPlayer.XPThreshhold = {
                         easy:easy,
@@ -52,8 +53,11 @@ const playersSlice = createSlice({
                         hard:hard,
                         deadly:deadly
                     }
+                    break;
                 }
+                console.log(playerlevel) // tell what level we are looping through    
             }
+
         },
     },
 })
