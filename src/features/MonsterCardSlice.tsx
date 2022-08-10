@@ -139,8 +139,8 @@ export const MonsterCardSlice:any = createSlice({
     }
 })
 // neeed to fix any type check
-export const selectMonsterCard = (state:any) => state.MonsterCard.monsterContent;
-export const showMonsterCard = (state:any) => state.MonsterCard.showMonsterCard;
+export const selectMonsterCard = (state: { MonsterCard: { monsterContent: any; }; }) => state.MonsterCard.monsterContent;
+export const showMonsterCard = (state: { MonsterCard: { showMonsterCard: boolean; }; }) => state.MonsterCard.showMonsterCard;
 
 export const {setShowMonsterCard, setMonsterCardContent} = MonsterCardSlice.actions;
 
