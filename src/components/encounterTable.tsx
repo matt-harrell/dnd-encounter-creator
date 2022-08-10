@@ -2,8 +2,8 @@ import { Grid, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../../features/encounterSlice";
-import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../../features/MonsterCardSlice";
+import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
+import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
 
 
 const EcounterTable = () => {
