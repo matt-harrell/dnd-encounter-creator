@@ -64,6 +64,12 @@ const playersSlice = createSlice({
             }
 
         },
+        removePlayer(state,action){
+            const playerToBeRemoved = action.payload;
+            if (playerToBeRemoved > -1){
+             state.players.splice(playerToBeRemoved,1);
+            }
+        },
         changedifficulty(state,action){
             state.encounterDifficulty = action.payload
         },
@@ -90,6 +96,14 @@ export const selectHardThreshhold = (state: { players: { hardThreshold: number; 
 export const selectDeadlyThreshhold = (state: { players: { deadlyThreshold: number; }; }) => state.players.deadlyThreshold;
 export const selectEncounterDifficulty = (state: { players: { encounterDifficulty: string; }; }) => state.players.encounterDifficulty;
 
-export const {addPlayer,changedifficulty, setEasyThreshhold,setMediumThreshhold, setHardThreshhold,setDeadlyThreshhold} = playersSlice.actions;
+export const {
+                addPlayer,
+                removePlayer,
+                changedifficulty,
+                setEasyThreshhold,
+                setMediumThreshhold,
+                setHardThreshhold,
+                setDeadlyThreshhold,
+            } = playersSlice.actions;
 
 export default playersSlice.reducer;

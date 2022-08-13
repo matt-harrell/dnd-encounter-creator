@@ -1,12 +1,14 @@
 // add players to table with name and level
 // be able to adjust player name and level
 import { FormControl, Grid,InputLabel,MenuItem,Select,SelectChangeEvent,TextField,Button,Typography } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import { useState,useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { selectEncounterExp } from "../features/encounterSlice";
 import { 
     selectLevels,
     addPlayer, 
+    removePlayer,
     selectPlayers, 
     changedifficulty, 
     selectEasyThreshhold,
@@ -17,7 +19,7 @@ import {
     setHardThreshhold,
     selectDeadlyThreshhold,
     setDeadlyThreshhold,
-    selectEncounterDifficulty
+    selectEncounterDifficulty,
 } from "../features/playersSlice";
 
 const PlayerTable = () => {
@@ -102,7 +104,9 @@ const PlayerTable = () => {
         setPlayerLevel('');
     }
     
-    
+    const handleRemoveClick = (index:number) => (e:any) =>{
+        dispatch(removePlayer(index))
+    }
 
     return(
         <>
@@ -159,7 +163,12 @@ const PlayerTable = () => {
                     {listOfPlayers.map((player,index) => (
                         <Grid container key={index} spacing={2} sx={{paddingY:.5,alignItems:'center'}}>
                             <Grid item xs={8}>{player.name}</Grid>
-                            <Grid item xs={4}>{player.level}</Grid>
+                            <Grid item xs={3}>{player.level}</Grid>
+                            <Grid item xs={1} sm={1}>
+                                <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
+                                    <CloseIcon/>
+                                </Button>
+                            </Grid>
                         </Grid>
                     ))}
                 </>
