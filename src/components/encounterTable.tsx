@@ -21,7 +21,7 @@ const EcounterTable = () => {
             dispatch(setShowMonsterCard(false))
         }
         dispatch(removeMonster(index))
-        dispatch(calcEncoutnerXP()) 
+        dispatch(calcEncoutnerXP()) // possibly refactor to use useeffect like in playersTable 
     }
     
     return (
