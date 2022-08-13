@@ -4,15 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
 import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
-import { changedifficulty, selectPlayers } from "../features/playersSlice";
 
 
 const EcounterTable = () => {
     const monsterList = useSelector(selectListOfMonsters);
     const showMonster = useSelector(showMonsterCard);
     const encounterExp = useSelector(selectEncounterExp);
-    const listOfPlayers = useSelector(selectPlayers);
     const dispatch = useDispatch();
+
     const handleViewClick = (index:number) => (e:any) =>{
         dispatch(setShowMonsterCard(true))
         dispatch(setMonsterCardContent(monsterList[index]))
@@ -24,50 +23,7 @@ const EcounterTable = () => {
         dispatch(removeMonster(index))
         dispatch(calcEncoutnerXP()) 
     }
-
-    const calcDifficulty = () => {
-       
-        const easyThresholds = listOfPlayers.map((player) => player.XPThreshhold.easy);
-        const easyValue = 0;
-        const calcEasyThreshhold = easyThresholds.reduce(
-        (previousValue, currentValue) => previousValue + currentValue,
-        easyValue
-        );
-
-        const mediumThresholds = listOfPlayers.map((player) => player.XPThreshhold.medium);
-        const mediumValue = 0;
-        const calcMediumThreshhold = mediumThresholds.reduce(
-        (previousValue, currentValue) => previousValue + currentValue,
-        mediumValue
-        );
-
-        const hardThresholds = listOfPlayers.map((player) => player.XPThreshhold.hard);
-        const hardValue = 0;
-        const calcHardThreshhold = hardThresholds.reduce(
-        (previousValue, currentValue) => previousValue + currentValue,
-        hardValue
-        );
-
-        const deadlyThresholds = listOfPlayers.map((player) => player.XPThreshhold.deadly);
-        const deadlyValue = 0;
-        const calcDeadlyThreshhold = deadlyThresholds.reduce(
-        (previousValue, currentValue) => previousValue + currentValue,
-        deadlyValue
-        );
-
-
-        if (calcEasyThreshhold <= encounterExp) {
-            dispatch(changedifficulty('Easy'));
-        } else if (calcMediumThreshhold <= encounterExp){
-            dispatch(changedifficulty('Medium'));
-        } else if (calcHardThreshhold <= encounterExp){
-            dispatch(changedifficulty('Hard'));
-        } else if (calcDeadlyThreshhold <= encounterExp){
-            dispatch(changedifficulty('Deadly'));
-        }   
-    }
     
-
     return (
     <>
     {monsterList.length !==0 && (
