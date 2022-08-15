@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 import { 
     loadMonsterList,
     selectSearchMonsterList,
-} from '../../../features/SearchMonsterListSlice';
-import { loadMonster,setShowMonsterCard } from '../../../features/MonsterCardSlice';
-import { addMonster, calcEncoutnerXP } from '../../../features/encounterSlice';
+} from '../../features/SearchMonsterListSlice';
+import { loadMonster,setShowMonsterCard } from '../../features/MonsterCardSlice';
+import { addMonster, calcEncoutnerXP } from '../../features/encounterSlice';
 
-import { AppDispatch } from '../../../app/store';
+import { AppDispatch } from '../../app/store';
 
 const SearchBar = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -59,24 +59,12 @@ const SearchBar = () => {
         try {
           const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
           dispatch(addMonster(monster)) 
-          dispatch(calcEncoutnerXP())        
+          dispatch(calcEncoutnerXP())                  
           
         } catch (rejectedValueOrSerializedError) {
           console.log(rejectedValueOrSerializedError)
         }
       }
-
-
-      // this is old logic when trying to pull up just monster card
-      // if (searchedMonster !== null) {
-      //   try {
-      //     dispatch(loadMonster(searchedMonster)).unwrap()
-      //   } catch (rejectedValueOrSerializedError) {
-      //     console.log(rejectedValueOrSerializedError)
-      //   }        
-      // }else {
-      //   dispatch(setShowMonsterCard(false))
-      // }
 
     }
 

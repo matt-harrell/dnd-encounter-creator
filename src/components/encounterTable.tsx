@@ -2,16 +2,16 @@ import { Grid, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../../features/encounterSlice";
-import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../../features/MonsterCardSlice";
+import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
+import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
 
 
 const EcounterTable = () => {
     const monsterList = useSelector(selectListOfMonsters);
     const showMonster = useSelector(showMonsterCard);
     const encounterExp = useSelector(selectEncounterExp);
-    // console.log(monsterList);
     const dispatch = useDispatch();
+
     const handleViewClick = (index:number) => (e:any) =>{
         dispatch(setShowMonsterCard(true))
         dispatch(setMonsterCardContent(monsterList[index]))
@@ -21,10 +21,9 @@ const EcounterTable = () => {
             dispatch(setShowMonsterCard(false))
         }
         dispatch(removeMonster(index))
-        dispatch(calcEncoutnerXP()) 
+        dispatch(calcEncoutnerXP()) // possibly refactor to use useeffect like in playersTable 
     }
     
-
     return (
     <>
     {monsterList.length !==0 && (
