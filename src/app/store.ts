@@ -3,6 +3,7 @@ import MonsterCardReducer from '../features/MonsterCardSlice';
 import SearchMonsterListReducer from '../features/SearchMonsterListSlice';
 import encounterSliceReducer from '../features/encounterSlice';
 import playersSliceReducer from '../features/playersSlice';
+import ClassSearchSliceReducer from '../features/classSearchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     SearchMonsterList:SearchMonsterListReducer,
     encounter:encounterSliceReducer,
     players:playersSliceReducer,
+    ClassSearch:ClassSearchSliceReducer,
   },
 });
 

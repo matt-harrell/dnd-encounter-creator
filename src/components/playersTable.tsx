@@ -20,12 +20,18 @@ import {
     selectDeadlyThreshhold,
     setDeadlyThreshhold,
     selectEncounterDifficulty,
+    // loadClassList,
 } from "../features/playersSlice";
+import { AppDispatch } from "../app/store";
+import ClassSearch from "./ClassSearch";
+import { addClassToClassList, selectClassList, selectSelectedClass } from "../features/classSearchSlice";
 
 const PlayerTable = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const inputLevels = useSelector(selectLevels);
+    const playerClass = useSelector(selectSelectedClass)
+    const playerClassList = useSelector(selectClassList);
     const listOfPlayers = useSelector(selectPlayers)
     const encounterExp = useSelector(selectEncounterExp);
     const easyThresholdXP = useSelector(selectEasyThreshhold);
@@ -99,7 +105,11 @@ const PlayerTable = () => {
     }
 
     const handleAddPlayerClick = () => {
-        dispatch(addPlayer({name:playerName,level:Number(playerLevel),XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}}));
+        dispatch(addPlayer({name:playerName,playerClass:playerClass,level:Number(playerLevel),XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}}));
+        const isExisting = playerClassList.some((option:string) => playerClass === option);
+          if (!isExisting) {
+            dispatch(addClassToClassList(playerClass))
+          }
         setPlayerName('');
         setPlayerLevel('');
     }
@@ -111,7 +121,7 @@ const PlayerTable = () => {
     return(
         <>
             <Grid container spacing={2}>
-                <Grid item xs={10}>
+                <Grid item xs={5}>
                     <TextField 
                         id="playerName" 
                         label="Player Name" 
@@ -120,6 +130,9 @@ const PlayerTable = () => {
                         onChange={handlePlayerNameChange}
                         sx={{width:'100%'}} 
                     />
+                </Grid>
+                <Grid item xs={5}>
+                    <ClassSearch/>
                 </Grid>
                 <Grid item xs={2}>
                     <FormControl sx={{minWidth:90}}>
@@ -162,7 +175,8 @@ const PlayerTable = () => {
                 <>
                     {listOfPlayers.map((player,index) => (
                         <Grid container key={index} spacing={2} sx={{paddingY:.5,alignItems:'center'}}>
-                            <Grid item xs={8}>{player.name}</Grid>
+                            <Grid item xs={4}>{player.name}</Grid>
+                            <Grid item xs={4}>{player.playerClass}</Grid>
                             <Grid item xs={3}>{player.level}</Grid>
                             <Grid item xs={1} sm={1}>
                                 <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >

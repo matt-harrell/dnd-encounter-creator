@@ -15,8 +15,9 @@ interface XPThreshhold {
 
 interface player {
     name:string,
-    level:number
-    XPThreshhold:XPThreshhold;
+    playerClass:string,
+    level:number,
+    XPThreshhold:XPThreshhold,
 }
 
 interface PlayersState {
@@ -39,15 +40,15 @@ const initialState = {
     hardThreshold:0,
     deadlyThreshold:0,
 
-} as PlayersState; 
+} as PlayersState;
 
 const playersSlice = createSlice({
     name:'players',
     initialState,
     reducers:{
         addPlayer(state,action:PayloadAction<player>){
-            const {name, level} = action.payload;
-            state.players.push({name:name,level:level, XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}})
+            const {name,playerClass,level} = action.payload;
+            state.players.push({name:name,playerClass:playerClass,level:level, XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}})
             const addedPlayer = state.players[state.players.length - 1];
             let playerlevel: keyof typeof XPThreshholds;
             for (playerlevel in XPThreshholds) {
