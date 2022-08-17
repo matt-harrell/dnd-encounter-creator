@@ -120,8 +120,24 @@ const PlayerTable = () => {
 
     return(
         <>
+            <Typography component={'h2'} variant={'h6'}>Difficulty: {encounterDifficulty}</Typography>
+            <Typography component={'h2'} variant={'h6'}>XP Threshholds for the Party</Typography>
+            <Grid container spacing={2} sx={{paddingY:1,marginBottom:5}}>
+                <Grid item xs={6} sm={3}>
+                    Easy: {easyThresholdXP}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                    Medium: {mediumThresholdXP}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                    Hard: {hardThresholdXP}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                    Deadly: {deadlyThresholdXP}
+                </Grid>
+            </Grid>
             <Grid container spacing={2}>
-                <Grid item xs={5}>
+                <Grid item xs={12} sm={5}>
                     <TextField 
                         id="playerName" 
                         label="Player Name" 
@@ -131,11 +147,11 @@ const PlayerTable = () => {
                         sx={{width:'100%'}} 
                     />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={8} sm={5}>
                     <ClassSearch/>
                 </Grid>
-                <Grid item xs={2}>
-                    <FormControl sx={{minWidth:90}}>
+                <Grid item xs={4} sm={2}>
+                    <FormControl sx={{width:'100%'}}>
                         <InputLabel id="playerLevel">Level</InputLabel>
                         <Select
                             labelId="playerLevel"
@@ -155,31 +171,21 @@ const PlayerTable = () => {
                     </Button>
                 </Grid>
             </Grid>
-            <Typography component={'h2'} variant={'h6'}>The Ecounter is curretly: {encounterDifficulty}</Typography>
-            <Typography component={'h2'} variant={'h6'}>XP Threshholds for the Party</Typography>
-            <Grid container spacing={2} sx={{paddingY:1}}>
-                <Grid item xs={12} sm={3}>
-                    Easy: {easyThresholdXP}
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    Medium: {mediumThresholdXP}
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    Hard: {hardThresholdXP}
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    Deadly: {deadlyThresholdXP}
-                </Grid>
-            </Grid>
             {listOfPlayers.length !==0 && (
                 <>
                     {listOfPlayers.map((player,index) => (
-                        <Grid container key={index} spacing={2} sx={{paddingY:.5,alignItems:'center'}}>
-                            <Grid item xs={4}>{player.name}</Grid>
-                            <Grid item xs={4}>{player.playerClass}</Grid>
-                            <Grid item xs={3}>{player.level}</Grid>
-                            <Grid item xs={1} sm={1}>
-                                <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
+                        <Grid container key={index} spacing={2} sx={{paddingY:.5,alignItems:'center',marginTop:2}}>
+                            <Grid item xs={4}>
+                                <Typography component={'p'} variant={'body1'}>{player.name}</Typography>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>   
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Typography component={'p'} variant={'body1'} >{player.level}</Typography>
+                            </Grid>
+                            <Grid item xs={2} sm={1}>
+                                <Button  sx={{padding:'1px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
                                     <CloseIcon/>
                                 </Button>
                             </Grid>

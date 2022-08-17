@@ -10,7 +10,7 @@ function App() {
   return (
     <Grid container spacing={2} paddingX={2}>
 
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <Grid container spacing={2} sx={{paddingY:5}}>
           <Grid item xs={12}>
             <PlayerTable/>
@@ -18,7 +18,7 @@ function App() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <Grid container spacing={2} sx={{paddingY:5}}>
           <Grid item xs={12}>
             <SearchBar />

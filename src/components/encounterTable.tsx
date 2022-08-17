@@ -38,7 +38,7 @@ const EcounterTable = () => {
                     <Grid item xs={6} sm={1}>CR: {monster.challenge_rating}</Grid>
                     <Grid item xs={6} sm={3}>
                         <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
-                            View Monster
+                            View
                         </Button>
                     </Grid>
                     <Grid item xs={1} sm={1}>
