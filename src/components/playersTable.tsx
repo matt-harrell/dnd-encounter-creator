@@ -1,13 +1,9 @@
-// add players to table with name and level
-// be able to adjust player name and level
-import { FormControl, Grid,InputLabel,MenuItem,Select,SelectChangeEvent,TextField,Button,Typography } from "@mui/material";
+import { Grid,Button,Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useState,useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { selectEncounterExp } from "../features/encounterSlice";
 import { 
-    selectLevels,
-    addPlayer, 
     removePlayer,
     selectPlayers, 
     changedifficulty, 
@@ -20,18 +16,12 @@ import {
     selectDeadlyThreshhold,
     setDeadlyThreshhold,
     selectEncounterDifficulty,
-    // loadClassList,
 } from "../features/playersSlice";
 import { AppDispatch } from "../app/store";
-import ClassSearch from "./ClassSearch";
-import { addClassToClassList, selectClassList, selectSelectedClass } from "../features/classSearchSlice";
+import AddPlayerComp from "./AddPlayerComp";
 
 const PlayerTable = () => {
     const dispatch = useDispatch<AppDispatch>();
-
-    const inputLevels = useSelector(selectLevels);
-    const playerClass = useSelector(selectSelectedClass)
-    const playerClassList = useSelector(selectClassList);
     const listOfPlayers = useSelector(selectPlayers)
     const encounterExp = useSelector(selectEncounterExp);
     const easyThresholdXP = useSelector(selectEasyThreshhold);
@@ -39,9 +29,6 @@ const PlayerTable = () => {
     const hardThresholdXP = useSelector(selectHardThreshhold);
     const deadlyThresholdXP = useSelector(selectDeadlyThreshhold);
     const encounterDifficulty = useSelector(selectEncounterDifficulty);
-
-    const [playerLevel, setPlayerLevel] = useState('');
-    const [playerName, setPlayerName] = useState('');
     
     useEffect(() => {
         // const calcDifficulty = () => {
@@ -95,24 +82,6 @@ const PlayerTable = () => {
              
         // }
       },[encounterExp,dispatch,listOfPlayers])
-
-    const handleLevelChange = (event: SelectChangeEvent) => {
-        setPlayerLevel(event.target.value)
-    }
-    
-    const handlePlayerNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-        setPlayerName(event.target.value)
-    }
-
-    const handleAddPlayerClick = () => {
-        dispatch(addPlayer({name:playerName,playerClass:playerClass,level:Number(playerLevel),XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}}));
-        const isExisting = playerClassList.some((option:string) => playerClass === option);
-          if (!isExisting) {
-            dispatch(addClassToClassList(playerClass))
-          }
-        setPlayerName('');
-        setPlayerLevel('');
-    }
     
     const handleRemoveClick = (index:number) => (e:any) =>{
         dispatch(removePlayer(index))
@@ -136,41 +105,9 @@ const PlayerTable = () => {
                     Deadly: {deadlyThresholdXP}
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={5}>
-                    <TextField 
-                        id="playerName" 
-                        label="Player Name" 
-                        variant="outlined"
-                        value={playerName}
-                        onChange={handlePlayerNameChange}
-                        sx={{width:'100%'}} 
-                    />
-                </Grid>
-                <Grid item xs={8} sm={5}>
-                    <ClassSearch/>
-                </Grid>
-                <Grid item xs={4} sm={2}>
-                    <FormControl sx={{width:'100%'}}>
-                        <InputLabel id="playerLevel">Level</InputLabel>
-                        <Select
-                            labelId="playerLevel"
-                            id="playerLevelSelect"
-                            value={playerLevel}
-                            label="Level"
-                            onChange={handleLevelChange}
-                        >   
-                            {inputLevels.map((level:number,index:number) => <MenuItem key={index} value={level}>{level}</MenuItem> )} 
-                        </Select>
-                    </FormControl>
-                </Grid>
 
-                <Grid item xs={12}>
-                    <Button variant="contained" disableElevation onClick={handleAddPlayerClick}>
-                        Add Player
-                    </Button>
-                </Grid>
-            </Grid>
+            <AddPlayerComp/>
+
             {listOfPlayers.length !==0 && (
                 <>
                     {listOfPlayers.map((player,index) => (
