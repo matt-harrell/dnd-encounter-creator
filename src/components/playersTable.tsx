@@ -18,7 +18,7 @@ import {
     selectEncounterDifficulty,
 } from "../features/playersSlice";
 import { AppDispatch } from "../app/store";
-import AddPlayerComp from "./AddPlayerComp";
+import AddPlayerCont from "./AddPlayer/AddPlayerCont";
 
 const PlayerTable = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -106,7 +106,7 @@ const PlayerTable = () => {
                 </Grid>
             </Grid>
 
-            <AddPlayerComp/>
+            <AddPlayerCont/>
 
             {listOfPlayers.length !==0 && (
                 <>

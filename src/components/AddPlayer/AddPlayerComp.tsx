@@ -1,40 +1,22 @@
 import { Grid, TextField, FormControl, InputLabel, Select, Button, SelectChangeEvent, MenuItem } from "@mui/material";
-import { useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { AppDispatch } from "../app/store";
-import { addClassToClassList, selectClassList, selectSelectedClass } from "../features/classSearchSlice";
-import { addPlayer, selectLevels } from "../features/playersSlice";
-
-import ClassSearch from "./ClassSearch";
 
 
-const AddPlayerComp = () =>{
-    const dispatch = useDispatch<AppDispatch>();
+import ClassSearch from "../ClassSearch";
 
-    const inputLevels = useSelector(selectLevels);
-    const playerClass = useSelector(selectSelectedClass);
-    const playerClassList = useSelector(selectClassList);
+interface AddPlayerCompProps {
+    inputLevels:number[];
+    playerLevel:string;
+    playerName:string;
+    handleLevelChange: (event: SelectChangeEvent) => void;
+    handlePlayerNameChange: (event:React.ChangeEvent<HTMLInputElement>) => void;
+    handleAddPlayerClick: () => void;
 
-    const [playerLevel, setPlayerLevel] = useState('');
-    const [playerName, setPlayerName] = useState('');
-
-    const handleLevelChange = (event: SelectChangeEvent) => {
-        setPlayerLevel(event.target.value)
-    }
     
-    const handlePlayerNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-        setPlayerName(event.target.value)
-    }
+}
 
-    const handleAddPlayerClick = () => {
-        dispatch(addPlayer({name:playerName,playerClass:playerClass,level:Number(playerLevel),XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}}));
-        const isExisting = playerClassList.some((option:string) => playerClass === option);
-          if (!isExisting) {
-            dispatch(addClassToClassList(playerClass))
-          }
-        setPlayerName('');
-        setPlayerLevel('');
-    }
+
+
+const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange, handlePlayerNameChange, handleAddPlayerClick  }:AddPlayerCompProps) =>{
 
     return (
 
