@@ -18,7 +18,6 @@ import {
     selectEncounterDifficulty,
 } from "../features/playersSlice";
 import { AppDispatch } from "../app/store";
-import AddPlayerCont from "./AddPlayer/AddPlayerCont";
 
 const PlayerTable = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -105,8 +104,6 @@ const PlayerTable = () => {
                     Deadly: {deadlyThresholdXP}
                 </Grid>
             </Grid>
-
-            <AddPlayerCont/>
 
             {listOfPlayers.length !==0 && (
                 <>

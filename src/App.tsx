@@ -5,6 +5,7 @@ import './App.css';
 import { Grid, } from '@mui/material';
 import EcounterTable from './components/encounterTable';
 import PlayerTable from './components/playersTable';
+import ChangeSearchCont from './components/ChangeSearch/ChangeSearchCont';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
 
       <Grid item xs={12}>
         <Grid container spacing={2} sx={{paddingY:5}}>
+        <Grid item xs={12}>
+            <ChangeSearchCont/>
+          </Grid>
           <Grid item xs={12}>
             <PlayerTable/>
           </Grid>
@@ -20,9 +24,6 @@ function App() {
 
       <Grid item xs={12}>
         <Grid container spacing={2} sx={{paddingY:5}}>
-          <Grid item xs={12}>
-            <SearchBar />
-          </Grid>
           <Grid item xs={12}>
             <EcounterTable/>
           </Grid>
