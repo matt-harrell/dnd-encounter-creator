@@ -20,8 +20,8 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
 
     return (
 
-        <Grid container spacing={2}>
-                <Grid item xs={12} sm={5}>
+        <Grid container spacing={2} padding={1} marginBottom={5}>
+                <Grid item xs={12}>
                     <TextField 
                         id="playerName" 
                         label="Player Name" 
@@ -31,10 +31,10 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
                         sx={{width:'100%'}} 
                     />
                 </Grid>
-                <Grid item xs={8} sm={5}>
+                <Grid item xs={8}>
                     <ClassSearch/>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={4}>
                     <FormControl sx={{width:'100%'}}>
                         <InputLabel id="playerLevel">Level</InputLabel>
                         <Select
