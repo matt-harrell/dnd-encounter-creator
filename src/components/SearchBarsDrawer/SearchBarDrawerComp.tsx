@@ -17,6 +17,8 @@ import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
 import SearchBar from '../SearchBar/searchBar';
+import { useEffect, useRef, useState } from 'react';
+import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
 
 interface SearchBarDrawerCompProps {
   mobileOpen:boolean,
@@ -27,6 +29,23 @@ interface SearchBarDrawerCompProps {
 const drawerWidth = 300;
 
 const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:SearchBarDrawerCompProps) => {
+  // need to fix padding issue 
+  const [dynamicTopPadding,setdynamicTopPadding] = useState<number | undefined>();
+  const heightRef= useRef<any>(null);
+  
+  useEffect(() => {
+    if (heightRef.current !== null){
+      setdynamicTopPadding((heightRef.current.clientHeight));
+      console.log(dynamicTopPadding)
+    }
+  },[dynamicTopPadding])
+
+  window.addEventListener('resize',()=>{
+    if (heightRef.current != null){
+      setdynamicTopPadding((heightRef.current.clientHeight));
+      console.log(dynamicTopPadding)
+    }
+  })
 
   const drawer = (
     <div>
@@ -54,6 +73,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
+        ref={heightRef}
       >
         <Toolbar>
           <IconButton
@@ -61,13 +81,11 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: 'none' },alignSelf:'start' }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+          <DifficultyDisplay/>
         </Toolbar>
       </AppBar>
       <Box
@@ -101,12 +119,12 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },marginTop:`${dynamicTopPadding}px`}}
       >
-        <Toolbar />
+        {/* <Toolbar /> */}
         <Grid container spacing={2} paddingX={2}>
             <Grid item xs={12}>
-            <Grid container spacing={2} sx={{paddingY:5}}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                 <PlayerTable/>
                 </Grid>
