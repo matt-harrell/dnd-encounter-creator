@@ -1,4 +1,4 @@
-import { Grid,Button,Typography } from "@mui/material";
+import { Grid,Button,Typography, Paper } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector,useDispatch } from "react-redux";
 import { 
@@ -23,22 +23,25 @@ const PlayerTable = () => {
             {listOfPlayers.length !==0 && (
                 <>
                     {listOfPlayers.map((player,index) => (
-                        <Grid container key={index} spacing={2} sx={{paddingY:.5,alignItems:'center',marginTop:2}}>
-                            <Grid item xs={4}>
-                                <Typography component={'p'} variant={'body1'}>{player.name}</Typography>
+                        <Paper elevation={4} sx={{marginY:2,padding:1,bgcolor:'secondary.light'}} key={index}>
+                            <Grid container spacing={1} sx={{alignItems:'center'}}>
+                                <Grid item xs={6} md={4}>
+                                    <Typography component={'p'} variant={'body1'}>{player.name}</Typography>
+                                </Grid>
+                                <Grid item xs={6} md={3}>
+                                    <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>   
+                                </Grid>
+                                <Grid item xs={6} md={2}>
+                                    <Typography component={'p'} variant={'body1'} >{player.level}</Typography>
+                                </Grid>
+                                <Grid item xs={2} sx={{display:{xs:'none',md:'block'}}}/>
+                                <Grid item xs={2} md={1}>
+                                    <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
+                                        <CloseIcon/>
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={4}>
-                                <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>   
-                            </Grid>
-                            <Grid item xs={2}>
-                                <Typography component={'p'} variant={'body1'} >{player.level}</Typography>
-                            </Grid>
-                            <Grid item xs={2} sm={1}>
-                                <Button  sx={{padding:'1px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
-                                    <CloseIcon/>
-                                </Button>
-                            </Grid>
-                        </Grid>
+                        </Paper>
                     ))}
                 </>
             )}

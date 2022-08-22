@@ -117,9 +117,13 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },marginTop:`${dynamicTopPadding}px`}}
+        sx={{ 
+            flexGrow: 1, 
+            p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
+            marginTop:`${dynamicTopPadding}px`,
+            bgcolor:'secondary.main'
+          }}
       >
-        {/* <Toolbar /> */}
         <Grid container spacing={2} paddingX={2}>
             <Grid item xs={12}>
             <Grid container spacing={2}>

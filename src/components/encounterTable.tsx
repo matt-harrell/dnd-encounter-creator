@@ -1,4 +1,4 @@
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Paper } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from "react-redux";
 
@@ -32,21 +32,23 @@ const EcounterTable = () => {
             <Grid item xs={12} sm={12}>Total Encoutner XP:{encounterExp}</Grid>
         </Grid>
             {monsterList.map((monster,index) => (
-                <Grid container spacing={2} key={index} sx={{paddingY:.5,alignItems:'center'}} >
-                    <Grid item xs={12} sm={4}>{monster.name}</Grid>
-                    <Grid item xs={6} sm={3}>XP: {monster.xp}</Grid>
-                    <Grid item xs={6} sm={1}>CR: {monster.challenge_rating}</Grid>
-                    <Grid item xs={6} sm={3}>
-                        <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
-                            View
-                        </Button>
+                <Paper elevation={4} sx={{marginY:2,padding:1,bgcolor:'secondary.light'}} key={index}>
+                    <Grid container spacing={1}  sx={{alignItems:'center'}} >
+                        <Grid item xs={12} md={4}>{monster.name}</Grid>
+                        <Grid item xs={6} md={3}>XP: {monster.xp}</Grid>
+                        <Grid item xs={6} md={2}>CR: {monster.challenge_rating}</Grid>
+                        <Grid item xs={6} md={2}>
+                            <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
+                                View
+                            </Button>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
+                                <CloseIcon/>
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={1} sm={1}>
-                        <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
-                            <CloseIcon/>
-                        </Button>
-                    </Grid>
-                </Grid>
+                </Paper>
             ))}
         </>
     )}
