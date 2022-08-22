@@ -36,14 +36,12 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
   useEffect(() => {
     if (heightRef.current !== null){
       setdynamicTopPadding((heightRef.current.clientHeight));
-      console.log(dynamicTopPadding)
     }
   },[dynamicTopPadding])
 
   window.addEventListener('resize',()=>{
     if (heightRef.current != null){
       setdynamicTopPadding((heightRef.current.clientHeight));
-      console.log(dynamicTopPadding)
     }
   })
 
