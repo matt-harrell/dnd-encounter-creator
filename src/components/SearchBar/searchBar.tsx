@@ -100,7 +100,7 @@ const SearchBar = () => {
           sx={{ width: '100%',marginX:'auto',marginBottom:2 }}
           renderInput={(params) => <TextField {...params} label="Monster" />}
         />
-        <Button variant="contained" disableElevation onClick={handleAddMonsterClick}>
+        <Button variant="contained" color='danger' disableElevation onClick={handleAddMonsterClick}>
           Add Monster
         </Button>
       </Box>

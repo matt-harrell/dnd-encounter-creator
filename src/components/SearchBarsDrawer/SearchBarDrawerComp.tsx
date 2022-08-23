@@ -46,7 +46,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
   })
 
   const drawer = (
-    <div>
+    <Box>
       <Toolbar sx={{justifyContent:'space-between',alignContent:'center'}}>
         <Typography component={'h3'} variant={'h6'}>
             Add Players/Monsters
@@ -59,7 +59,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
       <AddPlayerCont/>
       <Divider />
       <SearchBar/>
-    </div>
+    </Box>
   );
 
   return (
@@ -100,7 +100,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, bgcolor:'secondary.light' },
           }}
         >
           {drawer}
@@ -109,7 +109,8 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, bgcolor:'secondary.light' },
+            bgcolor:'secondary.main'
           }}
         >
           {drawer}
