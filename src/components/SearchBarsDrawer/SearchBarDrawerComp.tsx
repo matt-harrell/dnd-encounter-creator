@@ -72,6 +72,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
           ml: { sm: `${drawerWidth}px` },
         }}
         ref={heightRef}
+        color='DNDRed'
       >
         <Toolbar>
           <IconButton

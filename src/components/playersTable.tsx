@@ -23,7 +23,7 @@ const PlayerTable = () => {
             {listOfPlayers.length !==0 && (
                 <>
                     {listOfPlayers.map((player,index) => (
-                        <Paper elevation={4} sx={{marginY:2,padding:1,bgcolor:'secondary.light'}} key={index}>
+                        <Paper elevation={4} sx={{marginY:2,padding:1,bgcolor:'primary.dark',color:'white'}} key={index}>
                             <Grid container spacing={1} sx={{alignItems:'center'}}>
                                 <Grid item xs={6} md={4}>
                                     <Typography component={'p'} variant={'body1'}>{player.name}</Typography>

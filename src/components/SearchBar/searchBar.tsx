@@ -97,8 +97,8 @@ const SearchBar = () => {
             setInputValue(newInputValue);
           }}
           options={options}
-          sx={{ width: '100%',marginX:'auto',marginBottom:2 }}
-          renderInput={(params) => <TextField {...params} label="Monster" />}
+          sx={{ width: '100%',marginX:'auto',marginBottom:2,bgcolor:'white',padding:.3,borderRadius:1 }}
+          renderInput={(params) => <TextField variant='standard' {...params} label="Monster" />}
         />
         <Button variant="contained" color='danger' disableElevation onClick={handleAddMonsterClick}>
           Add Monster

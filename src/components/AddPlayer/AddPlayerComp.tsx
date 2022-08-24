@@ -25,10 +25,10 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
                     <TextField 
                         id="playerName" 
                         label="Player Name" 
-                        variant="outlined"
+                        variant="standard"
                         value={playerName}
                         onChange={handlePlayerNameChange}
-                        sx={{width:'100%'}} 
+                        sx={{width:'100%', bgcolor:'white',padding:.3,borderRadius:1}} 
                     />
                 </Grid>
                 <Grid item xs={8}>
@@ -43,6 +43,7 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
                             value={playerLevel}
                             label="Level"
                             onChange={handleLevelChange}
+                            sx={{bgcolor:'white',borderRadius:1}}
                         >   
                             {inputLevels.map((level:number,index:number) => <MenuItem key={index} value={level}>{level}</MenuItem> )} 
                         </Select>
