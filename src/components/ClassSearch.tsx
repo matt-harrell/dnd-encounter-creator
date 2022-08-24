@@ -112,8 +112,8 @@ const ClassSearch = () => {
           return option;
         }}
         renderOption={(props, option) => <li {...props}>{option}</li>}
-        sx={{ width: 300,marginX:'auto' }}
-        renderInput={(params) => <TextField {...params} label="Classes" />}
+        sx={{ width:'100%',marginX:'auto', bgcolor:'white',padding:.3,borderRadius:1 }}
+        renderInput={(params) => <TextField {...params} label="Classes" variant="standard" />}
       />
     );
 

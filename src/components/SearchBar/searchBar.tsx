@@ -1,6 +1,7 @@
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Box,Button } from '@mui/material';
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -12,6 +13,7 @@ import { loadMonster,setShowMonsterCard } from '../../features/MonsterCardSlice'
 import { addMonster, calcEncoutnerXP } from '../../features/encounterSlice';
 
 import { AppDispatch } from '../../app/store';
+
 
 const SearchBar = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -53,8 +55,13 @@ const SearchBar = () => {
       }
     }, [open]);
 
-    const handleChange = async (e:any, searchedMonster:string | null) => {
+    const handleChange = (e:any, searchedMonster:string | null) => {
       setSearchedMonster(searchedMonster);
+      
+
+    }
+
+    const handleAddMonsterClick = async () => {
       if (searchedMonster !== null){
         try {
           const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
@@ -65,34 +72,39 @@ const SearchBar = () => {
           console.log(rejectedValueOrSerializedError)
         }
       }
-
     }
 
     
     
 
     return (
-      <Autocomplete
-        open={open}
-        onOpen={() => {
-          setOpen(true);
-          setSearchedMonster(null);
-          dispatch(setShowMonsterCard(false))
-        }}
-        onClose={() => {
-          setOpen(false);
-        }}
-        loading={loading}
-        value={searchedMonster}
-        onChange={handleChange}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        options={options}
-        sx={{ width: 300,marginX:'auto' }}
-        renderInput={(params) => <TextField {...params} label="Monster" />}
-      />
+      <Box sx={{paddingX:1, marginY:5}}>
+        <Autocomplete
+          open={open}
+          onOpen={() => {
+            setOpen(true);
+            setSearchedMonster(null);
+            dispatch(setShowMonsterCard(false))
+          }}
+          onClose={() => {
+            setOpen(false);
+          }}
+          loading={loading}
+          value={searchedMonster}
+          onChange={handleChange}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          options={options}
+          sx={{ width: '100%',marginX:'auto',marginBottom:2,bgcolor:'white',padding:.3,borderRadius:1 }}
+          renderInput={(params) => <TextField variant='standard' {...params} label="Monster" />}
+        />
+        <Button variant="contained" color='danger' disableElevation onClick={handleAddMonsterClick}>
+          Add Monster
+        </Button>
+      </Box>
+      
     );
   }
 

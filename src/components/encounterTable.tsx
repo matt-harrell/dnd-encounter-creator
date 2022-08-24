@@ -1,4 +1,4 @@
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Paper, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,25 +28,39 @@ const EcounterTable = () => {
     <>
     {monsterList.length !==0 && (
         <>
-        <Grid container spacing={2} sx={{paddingBottom:5}}>
-            <Grid item xs={12} sm={12}>Total Encoutner XP:{encounterExp}</Grid>
+        <Grid container spacing={1}>
+            <Grid item xs={12} sm={'auto'}>
+                <Typography component={'h2'} variant={'h5'}>Monsters <Typography sx={{display:{xs:'none',sm:'inline'}}} variant={'h5'}>|</Typography></Typography>
+            </Grid>
+            <Grid item xs={12} sm={'auto'}>
+                <Typography component={'h2'} variant={'h5'}>Total Encoutner XP:{encounterExp}</Typography>
+            </Grid>
         </Grid>
+        
             {monsterList.map((monster,index) => (
-                <Grid container spacing={2} key={index} sx={{paddingY:.5,alignItems:'center'}} >
-                    <Grid item xs={12} sm={4}>{monster.name}</Grid>
-                    <Grid item xs={6} sm={3}>XP: {monster.xp}</Grid>
-                    <Grid item xs={6} sm={1}>CR: {monster.challenge_rating}</Grid>
-                    <Grid item xs={6} sm={3}>
-                        <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
-                            View Monster
-                        </Button>
+                <Paper elevation={4} sx={{marginY:2,padding:1,bgcolor:'danger.main'}} key={index}>
+                    <Grid container spacing={1}  sx={{alignItems:'center'}} color={'white'}>
+                        <Grid item xs={12} md={4}>
+                            <Typography>{monster.name}</Typography>
+                        </Grid>
+                        <Grid item xs={6} md={3}>
+                            <Typography>XP: {monster.xp}</Typography>
+                        </Grid>
+                        <Grid item xs={6} md={2}>
+                            <Typography>CR: {monster.challenge_rating}</Typography>
+                        </Grid>
+                        <Grid item xs={6} md={2}>
+                            <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
+                                View
+                            </Button>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
+                                <CloseIcon/>
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={1} sm={1}>
-                        <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
-                            <CloseIcon/>
-                        </Button>
-                    </Grid>
-                </Grid>
+                </Paper>
             ))}
         </>
     )}
