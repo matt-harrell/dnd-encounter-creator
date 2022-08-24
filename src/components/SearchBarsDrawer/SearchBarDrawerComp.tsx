@@ -17,7 +17,6 @@ import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
 import SearchBar from '../SearchBar/searchBar';
-import { useEffect, useRef, useState } from 'react';
 import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
 
 interface SearchBarDrawerCompProps {
@@ -29,21 +28,6 @@ interface SearchBarDrawerCompProps {
 const drawerWidth = 300;
 
 const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:SearchBarDrawerCompProps) => {
-  // need to fix padding issue 
-  const [dynamicTopPadding,setdynamicTopPadding] = useState<number | undefined>();
-  const heightRef= useRef<any>(null);
-  
-  useEffect(() => {
-    if (heightRef.current !== null){
-      setdynamicTopPadding((heightRef.current.clientHeight));
-    }
-  },[dynamicTopPadding])
-
-  window.addEventListener('resize',()=>{
-    if (heightRef.current != null){
-      setdynamicTopPadding((heightRef.current.clientHeight));
-    }
-  })
 
   const drawer = (
     <Box>
@@ -71,7 +55,6 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
-        ref={heightRef}
         color='DNDRed'
       >
         <Toolbar>
@@ -122,7 +105,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
         sx={{ 
             flexGrow: 1, 
             p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop:`${dynamicTopPadding}px`,
+            marginTop:{xs:16,sm:15,md:12},
             bgcolor:'secondary.main'
           }}
       >
