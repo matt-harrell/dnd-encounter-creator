@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import {
   selectMonsterCard,
+  setShowMonsterCard,
   showMonsterCard,  
 } from "../../features/MonsterCardSlice";
-import { Grid,Typography,Box } from "@mui/material";
+import { Grid,Typography,Box,Paper, Button } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 
 interface profType {
@@ -39,6 +41,7 @@ interface actionType{
 
 
 const MonsterCard = () => {
+  const dispatch = useDispatch();
   const monster = useSelector(selectMonsterCard);
   const {
           name,
@@ -66,17 +69,28 @@ const MonsterCard = () => {
           legendary_actions,
 
         } = monster;
-  const showMonster = useSelector(showMonsterCard);    
+  const showMonster = useSelector(showMonsterCard);
+  
+  const handleShowMonsterCard = () => {
+    dispatch(setShowMonsterCard(false))
+  }
 
     return (
       <div>
         {showMonster && (
-        <Box>
+        <Paper sx={{bgcolor:'secondary.light',padding:3}} elevation={4} id='monsterCard'>
+          <Box sx={{textAlign:'right'}}>
+            <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color="error" variant="contained" disableElevation onClick={handleShowMonsterCard} >
+              <CloseIcon />
+            </Button>
+          </Box>
+          
             <Typography component={'h2'} variant={'h3'}>{name}</Typography>
             <Typography component={'p'} variant={'body1'}>{size}, {type}, {alignment}</Typography>
+            
             <hr />
           <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} sx={{textAlign:'left'}}>
+          <Grid item xs={12} lg={6} sx={{textAlign:'left'}}>
             
             <Box>
               <Typography component={'p'} variant={'body1'}>Armor Class:{armor_class}</Typography>
@@ -207,7 +221,7 @@ const MonsterCard = () => {
             </Box>
 
           </Grid>
-          <Grid item xs={12} sm={6} sx={{textAlign:'left'}}>
+          <Grid item xs={12} lg={6} sx={{textAlign:'left'}}>
             <Box>
             {actions.length !== 0 && (
                 <Box>
@@ -243,6 +257,10 @@ const MonsterCard = () => {
                    <hr/>
                 </Box> 
               )}
+            </Box>
+          </Grid>
+          <Grid item xs={12} sx={{textAlign:'left'}}>
+            <Box>
             {legendary_actions.length !== 0 && (
                 <Box>
                   <Typography component={'h2'} variant={'h3'}>Legendary Actions</Typography>
@@ -258,7 +276,7 @@ const MonsterCard = () => {
             </Box>
           </Grid>
         </Grid>
-        </Box>
+        </Paper>
         )}
       </div>
       
