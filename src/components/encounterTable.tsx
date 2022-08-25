@@ -1,6 +1,7 @@
 import { Grid, Button, Paper, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from "react-redux";
+import { scroller } from "react-scroll";
 
 import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
 import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
@@ -12,9 +13,15 @@ const EcounterTable = () => {
     const encounterExp = useSelector(selectEncounterExp);
     const dispatch = useDispatch();
 
-    const handleViewClick = (index:number) => (e:any) =>{
-        dispatch(setShowMonsterCard(true))
-        dispatch(setMonsterCardContent(monsterList[index]))
+    const handleViewClick = (index:number) => async (e:any) =>{
+        await dispatch(setMonsterCardContent(monsterList[index]));
+        await dispatch(setShowMonsterCard(true));
+        scroller.scrollTo('monsterCard', {
+            duration: 500,
+            delay: 100,
+            smooth: true,
+            offset: -150,
+          })
     }
     const handleRemoveClick = (index:number) => (e:any) =>{
         if(showMonster){
@@ -30,7 +37,7 @@ const EcounterTable = () => {
         <>
         <Grid container spacing={1}>
             <Grid item xs={12} sm={'auto'}>
-                <Typography component={'h2'} variant={'h5'}>Monsters <Typography sx={{display:{xs:'none',sm:'inline'}}} variant={'h5'}>|</Typography></Typography>
+                <Typography component={'h2'} variant={'h5'}>Monsters <Typography sx={{display:{xs:'none',sm:'inline'}}} component={'span'} variant={'h5'}>|</Typography></Typography>
             </Grid>
             <Grid item xs={12} sm={'auto'}>
                 <Typography component={'h2'} variant={'h5'}>Total Encoutner XP:{encounterExp}</Typography>
