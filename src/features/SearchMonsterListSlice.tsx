@@ -15,7 +15,7 @@ export const loadMonstersEqualToCR = createAsyncThunk(
         if(challengeRating === 'any'){
             const response = await fetch('https://www.dnd5eapi.co/api/monsters')
             const monsterListAPI = await response.json();
-            return monsterListAPI.results.map((monster: { name: string; }) => monster.name)
+            return monsterListAPI.results.map((monster: { name: string; }) => monster.name)            
         } else{
             const response = await fetch(`https://www.dnd5eapi.co/api/monsters?challenge_rating=${challengeRating}`);
             const matchedMonsterList = await response.json();            

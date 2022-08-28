@@ -16,8 +16,8 @@ import PlayerTable from '../playersTable';
 import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
-import SearchBar from '../SearchBar/searchBar';
 import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
+import MonsterSearch from '../SearchBar/MonsterSearch';
 
 interface SearchBarDrawerCompProps {
   mobileOpen:boolean,
@@ -42,7 +42,7 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
       <Divider />
       <AddPlayerCont/>
       <Divider />
-      <SearchBar/>
+      <MonsterSearch/>
     </Box>
   );
 
