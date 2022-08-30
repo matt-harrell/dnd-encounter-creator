@@ -44,28 +44,34 @@ export const SearchMonsterListSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(loadMonsterList.pending,(state) =>{
-            state.isMonsterListLoading = true;
+            // state.isMonsterListLoading = true;
             state.failedToLoadMonsterList = false;
-            state.monsterListState = [];
+            // state.monsterListState = [];
         })
         .addCase(loadMonsterList.rejected,(state) =>{
-            state.isMonsterListLoading = false;
+            // state.isMonsterListLoading = false;
             state.failedToLoadMonsterList = true;
         })
         .addCase(loadMonsterList.fulfilled,(state,action) =>{
-            state.isMonsterListLoading = false;
+            // state.isMonsterListLoading = false;
             state.failedToLoadMonsterList = false;
             state.monsterListState = action.payload;
         })
         .addCase(loadMonstersEqualToCR.fulfilled,(state,action) => {
+            state.isMonsterListLoading = false;
+            state.failedToLoadMonsterList = false;
             state.monsterListState = action.payload;
+        })
+        .addCase(loadMonstersEqualToCR.pending,(state) => {
+            state.isMonsterListLoading = true;
+            state.failedToLoadMonsterList = false;
         })
     }
 })
 
 export const selectSearchMonsterList = (state: { SearchMonsterList: { monsterListState: string[]; }; }) => state.SearchMonsterList.monsterListState;
 
-export const isMonsterListLoading = (state: { isMonsterListLoading: boolean; }) => state.isMonsterListLoading;
+export const selectIsMonsterListLoading = (state: { SearchMonsterList: { isMonsterListLoading: boolean; }; }) => state.SearchMonsterList.isMonsterListLoading;
 export const failedToLoadMonsterList = (state: { failedToLoadMonsterList: boolean; }) => state.failedToLoadMonsterList;
 
 export default SearchMonsterListSlice.reducer;

@@ -24,6 +24,8 @@ const MonsterSearch = () => {
     const [options, setOptions] = useState<string[]>([]);
     const [open, setOpen] = useState(false);
     const loading = open && options.length === 0;
+    const [disabled, setDisabled] = useState(false);
+    const [label,setLabel] = useState('Monster') 
 
     useEffect(() => {
         dispatch(loadMonsterList())
@@ -55,8 +57,18 @@ const MonsterSearch = () => {
     useEffect(() => {
         if(cRInpit !== ''){
             dispatch(loadMonstersEqualToCR(cRInpit))
-        }
+        }  
     }, [dispatch, cRInpit])
+    
+    useEffect(() =>{
+        if (searchMonsterList.length === 0){
+            setDisabled(true);
+            setLabel('No Options')
+        } else{
+            setDisabled(false);
+            setLabel('Monsters')
+        }
+    },[searchMonsterList.length])
 
     const handleChange = (e: any,searchedMonster: string | null) => {
         setSearchedMonster(searchedMonster);
@@ -108,6 +120,8 @@ const MonsterSearch = () => {
             handleInputChange={handleInputChange}
             handleOpen={handleOpen}
             handleClose={handleClose}
+            disabled={disabled}
+            label={label}
         />
     );
 

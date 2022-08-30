@@ -17,18 +17,21 @@ interface MonsterSearchCompProps{
   handleOpen:() => void;
   handleClose:() => void;
   handleInputChange:(newInputValue:string) => void;
+  disabled:boolean;
+  label:string;
 }
 
 
 const challegeRatingsList = ['any',0,0.125,0.25,0.5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
-const MonsterSearchComp = ({searchedMonster,cRInpit,options,open,loading,handleChange,handleAddMonsterClick,handleCRChange,handleOpen,handleClose,handleInputChange,inputValue}:MonsterSearchCompProps) => {      
+const MonsterSearchComp = ({searchedMonster,cRInpit,options,open,loading,disabled,label,handleChange,handleAddMonsterClick,handleCRChange,handleOpen,handleClose,handleInputChange,inputValue}:MonsterSearchCompProps) => {      
 
     return (
       <Box sx={{paddingX:1, marginY:5}}>
         <Grid container spacing={1}>
           <Grid item xs={8}>
             <Autocomplete
+              disabled={disabled}
               open={open}
               onOpen={handleOpen}
               onClose={handleClose}
@@ -41,7 +44,7 @@ const MonsterSearchComp = ({searchedMonster,cRInpit,options,open,loading,handleC
               }}
               options={options}
               sx={{ width: '100%', marginX: 'auto', marginBottom: 2, bgcolor: 'white', padding: .3, borderRadius: 1 }}
-              renderInput={(params) => <TextField variant='standard' {...params} label="Monster" />}
+              renderInput={(params) => <TextField variant='standard' {...params} label={label} />}
             />
           </Grid>
           <Grid item xs={4}>
