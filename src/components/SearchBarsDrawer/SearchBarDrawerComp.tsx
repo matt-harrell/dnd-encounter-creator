@@ -7,7 +7,7 @@ import {
         Drawer,
         IconButton,
         Typography,
-        Toolbar
+        Toolbar,
        } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,16 +18,18 @@ import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
 import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
 import MonsterSearch from '../SearchBar/MonsterSearch';
+import { AppBarColor } from './SearchBarDrawerCont';
 
 interface SearchBarDrawerCompProps {
   mobileOpen:boolean,
   handleDrawerToggle:() => void;
   handleDrawerClose:() => void;
+  color:AppBarColor;
 }
 
 const drawerWidth = 300;
 
-const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:SearchBarDrawerCompProps) => {
+const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerClose}:SearchBarDrawerCompProps) => {
 
   const drawer = (
     <Box>
@@ -54,8 +56,9 @@ const SearchBarDrawerComp = ({mobileOpen,handleDrawerToggle, handleDrawerClose}:
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          transition: "background-color .4s"
         }}
-        color='DNDRed'
+        color={color}
       >
         <Toolbar>
           <IconButton
