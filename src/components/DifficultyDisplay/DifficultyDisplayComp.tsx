@@ -1,5 +1,5 @@
 import { Grid,Typography,Box } from "@mui/material";
-import InfoDrawerComp from "../InfoDrawer/InfoDrawerComp";
+import InfoDrawer from "../InfoDrawer/InfoDrawer";
 
 interface DifficultyDisplayCompProps {
     easyThresholdXP:number;
@@ -21,7 +21,7 @@ const DifficultyDisplayComp = ({easyThresholdXP,mediumThresholdXP, hardThreshold
                     <Typography component={'h2'} variant={'h6'}>Difficulty: {encounterDifficulty}</Typography>
                 </Grid>
                 <Grid item xs={2} sx={{textAlign:'right'}}>
-                    <InfoDrawerComp/> 
+                    <InfoDrawer/> 
                 </Grid>
             </Grid>
             <Typography component={'h2'} variant={'h6'}>XP Threshholds for the Party</Typography>

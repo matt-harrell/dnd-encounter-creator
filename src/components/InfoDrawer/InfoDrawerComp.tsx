@@ -1,29 +1,14 @@
-import { useState,useEffect } from 'react';
 import {Box, Drawer,IconButton, Toolbar, Typography } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-
 import InfoIcon from '@mui/icons-material/Info';
-import { selectEncounterDifficulty } from '../../features/playersSlice';
-import { useSelector } from 'react-redux';
 
+interface InfoDrawerCompProps {
+  open:boolean;
+  color:string;
+  toggleDrawer:() => void;
+}
 
-const InfoDrawerComp = () => {
-  const [open, setOpen] = useState(false);
-  const [color, setColor] = useState<string>("white");
-  const encounterDifficulty = useSelector(selectEncounterDifficulty);
-
-  useEffect(() => {
-    if(encounterDifficulty === 'Medium'){
-      setColor('#000000')
-    }else{
-      setColor('#fff')
-    }
-  }, [encounterDifficulty]);
-
-  const toggleDrawer = () => {
-    setOpen(open ? false : true);
-  };
+const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
 
   return (
     <Box>
