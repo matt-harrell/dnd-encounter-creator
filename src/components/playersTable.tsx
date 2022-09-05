@@ -32,10 +32,10 @@ const PlayerTable = () => {
                                     <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>   
                                 </Grid>
                                 <Grid item xs={6} md={2}>
-                                    <Typography component={'p'} variant={'body1'} >{player.level}</Typography>
+                                    <Typography component={'p'} variant={'body1'}>Level: {player.level}</Typography>
                                 </Grid>
                                 <Grid item xs={2} sx={{display:{xs:'none',md:'block'}}}/>
-                                <Grid item xs={2} md={1}>
+                                <Grid item xs={6} md={1} sx={{textAlign:'right'}}>
                                     <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
                                         <CloseIcon/>
                                     </Button>

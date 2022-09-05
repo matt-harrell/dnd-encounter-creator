@@ -37,3 +37,17 @@
     transform: translateY(0px);
   }
 }
+
+.pb-1{
+  padding-bottom:1rem;
+}
+
+.d-none-mobile{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .d-none-mobile{
+    display: list-item;
+  }
+}
