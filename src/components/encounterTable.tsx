@@ -5,6 +5,7 @@ import { scroller } from "react-scroll";
 
 import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
 import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
+import CRToolTip from "./ToolTips/CRToolTip";
 
 
 const EcounterTable = () => {
@@ -54,14 +55,14 @@ const EcounterTable = () => {
                             <Typography>XP: {monster.xp}</Typography>
                         </Grid>
                         <Grid item xs={6} md={2}>
-                            <Typography>CR: {monster.challenge_rating}</Typography>
+                            <Typography><CRToolTip/> {monster.challenge_rating}</Typography>
                         </Grid>
-                        <Grid item xs={6} md={2}>
+                        <Grid item xs={6} md={2} sx={{textAlign:'center'}}>
                             <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
                                 View
                             </Button>
                         </Grid>
-                        <Grid item xs={1}>
+                        <Grid item xs={6} md={1} sx={{textAlign:'right'}}>
                             <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
                                 <CloseIcon/>
                             </Button>

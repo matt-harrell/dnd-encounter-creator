@@ -2,6 +2,7 @@ import {Box, Divider, Drawer,IconButton, Toolbar, Typography } from '@mui/materi
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InfoIcon from '@mui/icons-material/Info';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChallengeRatingToolTip from '../ToolTips/ChallengeRatingToolTip';
 
 interface InfoDrawerCompProps {
   open:boolean;
@@ -18,8 +19,7 @@ const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
       </IconButton>
       <Drawer 
         anchor={"right"} 
-        // open={open}
-        open={true} 
+        open={open} 
         onClose={toggleDrawer}
         sx={{
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300, bgcolor:'secondary.light' },
@@ -52,8 +52,7 @@ const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
             <li className='pb-1'>First add your players by adding the name,class, and level the click add player.</li>
             <li className='pb-1'>
               After you have added all your players, add any monster you wish by clicking the “Monsters” 
-              search bar and typing in a monster’s name. You can also sort monsters by their <u>challenge 
-              rating</u> or CR.
+              search bar and typing in a monster’s name. You can also sort monsters by their <ChallengeRatingToolTip/> or CR.
             </li>
             <li className="pb-1">When you add monsters to the encounter, the top Difficulty Display will automatically update showing how difficult it will be for the players.</li>
             <li className="pb-1">
