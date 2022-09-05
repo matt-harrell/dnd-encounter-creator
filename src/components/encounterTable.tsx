@@ -57,7 +57,7 @@ const EcounterTable = () => {
                         <Grid item xs={6} md={2}>
                             <Typography><CRToolTip/> {monster.challenge_rating}</Typography>
                         </Grid>
-                        <Grid item xs={6} md={2} sx={{textAlign:'center'}}>
+                        <Grid item xs={6} md={2}>
                             <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
                                 View
                             </Button>
