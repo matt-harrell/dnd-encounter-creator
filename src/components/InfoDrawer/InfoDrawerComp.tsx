@@ -37,7 +37,7 @@ const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
           <Typography component={'p'}>
             The purpose of the app is to help Dungeon Master's create combat encounters 
             for the board game Dungeons and Dragons without having to perform manual 
-            calculations on making the encounter balanced. This article provides a full 
+            calculations on making the encounter balanced. This <a target="_blank" href='https://www.dndbeyond.com/sources/basic-rules/building-combat-encounters' rel="noreferrer">article</a> provides a full 
             walkthrough of the manual process of building an encounter without the help 
             of this app performing the computations. 
           </Typography>
