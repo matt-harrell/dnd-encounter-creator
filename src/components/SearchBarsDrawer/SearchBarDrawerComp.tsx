@@ -8,6 +8,7 @@ import {
         IconButton,
         Typography,
         Toolbar,
+        Stack,
        } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -19,6 +20,7 @@ import AddPlayerCont from '../AddPlayer/AddPlayerCont';
 import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
 import MonsterSearch from '../SearchBar/MonsterSearch';
 import { AppBarColor } from './SearchBarDrawerCont';
+import InfoDrawer from '../InfoDrawer/InfoDrawer';
 
 interface SearchBarDrawerCompProps {
   mobileOpen:boolean,
@@ -60,18 +62,23 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
         }}
         color={color}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' },alignSelf:'start' }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <DifficultyDisplay/>
-        </Toolbar>
+        <Box sx={{display:'flex',paddingX:2,flexDirection:{xs:'column',sm:'row'}}}>
+          <Stack direction={'row'} justifyContent={{xs:'space-between',sm:'flex-end'}} sx={{order:{xs:1,sm:2}}}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' },alignSelf:'start' }}
+            >
+              <MenuIcon fontSize='large' />
+            </IconButton>
+            <InfoDrawer/>
+          </Stack>
+          <Box sx={{order:{xs:2,sm:1},width:'100%',alignItem:'start'}}>
+            <DifficultyDisplay/>
+          </Box>
+        </Box>
       </AppBar>
       <Box
         component="nav"
@@ -108,7 +115,7 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
         sx={{ 
             flexGrow: 1, 
             p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop:{xs:16,sm:15,md:12},
+            marginTop:{xs:22,sm:12},
             bgcolor:'secondary.main'
           }}
       >
