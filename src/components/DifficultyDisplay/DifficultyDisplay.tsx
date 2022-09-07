@@ -67,7 +67,7 @@ const DifficultyDisplay = () => {
     
     
           if (encounterExp === 0) {
-              dispatch(changedifficulty('No Monsters Added'));
+              dispatch(changedifficulty('No Monsters'));
           } else if ((encounterExp >= calcEasyThreshhold && encounterExp < calcMediumThreshhold) || encounterExp <= calcEasyThreshhold){
               dispatch(changedifficulty('Easy'));
           } else if (encounterExp >= calcMediumThreshhold && encounterExp < calcHardThreshhold){

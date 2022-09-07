@@ -1,6 +1,6 @@
 import {Box, Divider, Drawer,IconButton, Toolbar, Typography } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InfoIcon from '@mui/icons-material/Info';
+import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChallengeRatingToolTip from '../ToolTips/ChallengeRatingToolTip';
 
@@ -15,7 +15,7 @@ const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
   return (
     <Box>
       <IconButton onClick={toggleDrawer} aria-label="Explain App">
-        <InfoIcon sx={{color:`${color}`}}/>
+        <HelpIcon fontSize='large' sx={{color:`${color}`}}/>
       </IconButton>
       <Drawer 
         anchor={"right"} 

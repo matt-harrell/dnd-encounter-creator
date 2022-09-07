@@ -34,7 +34,7 @@ interface PlayersState {
 const initialState = {
     players:[],
     levels:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-    encounterDifficulty:'No Monsters Added',
+    encounterDifficulty:'No Monsters',
     easyThreshold:0,
     mediumThreshold:0,
     hardThreshold:0,
