@@ -13,6 +13,7 @@ import {
     selectDeadlyThreshhold,
     setDeadlyThreshhold,
     selectEncounterDifficulty,
+    selectEditPlayerIndex,
 } from "../../features/playersSlice";
 import DifficultyDisplayComp from "./DifficultyDisplayComp";
 import { AppDispatch } from "../../app/store";
@@ -20,7 +21,9 @@ import { AppDispatch } from "../../app/store";
 const DifficultyDisplay = () => {
 
     const dispatch = useDispatch<AppDispatch>();
-    const listOfPlayers = useSelector(selectPlayers)
+    const listOfPlayers = useSelector(selectPlayers);
+    const editPlayerIndex = useSelector(selectEditPlayerIndex);
+    const editPlayerLevel = listOfPlayers[editPlayerIndex || 0]?.level;
     const encounterExp = useSelector(selectEncounterExp);
     const easyThresholdXP = useSelector(selectEasyThreshhold);
     const mediumThresholdXP = useSelector(selectMediumThreshhold);
@@ -80,7 +83,7 @@ const DifficultyDisplay = () => {
         // }
              
         // }
-      },[encounterExp,dispatch,listOfPlayers])
+      },[encounterExp,dispatch,listOfPlayers, editPlayerLevel])
 
     return(
         <DifficultyDisplayComp
