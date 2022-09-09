@@ -1,6 +1,6 @@
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { selectEditPlayerIndex, selectLevels, selectPlayers,setPlayerLevel, updateXPTheshholds } from "../../features/playersSlice";
+import { selectEditPlayerIndex, selectLevels, selectPlayers,setPlayerLevel, updateXPTheshholds } from "../../../features/playersSlice";
 
 
 const EditPlayerLevel = () => {

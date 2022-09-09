@@ -96,6 +96,9 @@ const playersSlice = createSlice({
                 }   
             }
         },
+        setPlayerName(state,action){
+            state.players[state.targetPlayerIndex || 0].name = action.payload;
+        },
         changedifficulty(state,action){
             state.encounterDifficulty = action.payload
         },
@@ -129,6 +132,7 @@ export const {
                 setTargetEditPlayer,
                 setPlayerLevel,
                 updateXPTheshholds,
+                setPlayerName,
                 changedifficulty,
                 setEasyThreshhold,
                 setMediumThreshhold,
