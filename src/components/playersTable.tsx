@@ -12,20 +12,33 @@ import {
 import { AppDispatch } from "../app/store";
 import EditPlayerLevel from "./EditPlayer/editPlayerLevel/editPlayerLevel";
 import EditPlayerName from "./EditPlayer/EditPlayerName/editPlayerName";
+import EditPlayerClass from "./EditPlayer/EditPlayerClass/EditPlayerClass";
+import { addClassToClassList, selectClassList } from "../features/classSearchSlice";
 
 const PlayerTable = () => {
     const dispatch = useDispatch<AppDispatch>();
     const listOfPlayers = useSelector(selectPlayers);
     const editPlayerIndex = useSelector(selectEditPlayerIndex);
-    
-    
+    const playerClassList = useSelector(selectClassList);
+
+    // when edtting a player
+    const playerIndex = useSelector(selectEditPlayerIndex);
+    const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;
+
     const handleRemoveClick = (index:number) => (e:any) =>{
         dispatch(removePlayer(index))
     }
 
     const handleEditClick = (index:number) => (e:any) =>{
         if (index === editPlayerIndex) {
+            const isExisting = playerClassList.some((option: string) => edittingPlayerClass === option);
+            
+            if (!isExisting) {
+                 dispatch(addClassToClassList(edittingPlayerClass));
+            }
+            
             dispatch(setTargetEditPlayer(null))
+            
         } else {
             dispatch(setTargetEditPlayer(index))
         }
@@ -44,7 +57,7 @@ const PlayerTable = () => {
                                     {editPlayerIndex === index ? <EditPlayerName/> : <Typography component={'p'} variant={'body1'}>{player.name}</Typography>}
                                 </Grid>
                                 <Grid item xs={6} md={3}>
-                                     <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography> 
+                                     {editPlayerIndex === index ? <EditPlayerClass/> :<Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>} 
                                 </Grid>
                                 <Grid item xs={6} md={2}>
                                 {editPlayerIndex === index ? <EditPlayerLevel/> : <Typography component={'p'} variant={'body1'}>Level: {player.level}</Typography>}

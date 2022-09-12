@@ -99,6 +99,9 @@ const playersSlice = createSlice({
         setPlayerName(state,action){
             state.players[state.targetPlayerIndex || 0].name = action.payload;
         },
+        setPlayerClass(state,action){
+            state.players[state.targetPlayerIndex || 0].playerClass = action.payload;
+        },
         changedifficulty(state,action){
             state.encounterDifficulty = action.payload
         },
@@ -133,6 +136,7 @@ export const {
                 setPlayerLevel,
                 updateXPTheshholds,
                 setPlayerName,
+                setPlayerClass,
                 changedifficulty,
                 setEasyThreshhold,
                 setMediumThreshhold,
