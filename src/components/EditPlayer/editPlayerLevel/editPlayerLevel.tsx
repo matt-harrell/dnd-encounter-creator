@@ -1,6 +1,6 @@
-import { FormControl, Select, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEditPlayerIndex, selectLevels, selectPlayers,setPlayerLevel, updateXPTheshholds } from "../../../features/playersSlice";
+import EditPlayerLevelComp from "./EditPlayerLevelComp";
 
 
 const EditPlayerLevel = () => {
@@ -20,18 +20,11 @@ const EditPlayerLevel = () => {
 
 
     return (
-        <FormControl sx={{ width: '5em' }}>
-            <Select
-                labelId="playerLevel"
-                id="playerLevelSelect"
-                value={editPlayerLevel}
-                label="##"
-                onChange={handleLevelChange}
-                sx={{ bgcolor: 'white', borderRadius: 1 }}
-            >
-                {inputLevels.map((level: number, index: number) => <MenuItem key={index} value={level}>{level}</MenuItem>)}
-            </Select>
-        </FormControl>
+        <EditPlayerLevelComp
+            editPlayerLevel={editPlayerLevel}
+            handleLevelChange={handleLevelChange}
+            inputLevels={inputLevels}
+        />
     );
 
 }
