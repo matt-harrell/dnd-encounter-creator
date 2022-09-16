@@ -115,7 +115,7 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
         sx={{ 
             flexGrow: 1, 
             p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop:{xs:22,sm:12},
+            marginTop:{xs:22,sm:15,md:12},
             bgcolor:'secondary.main'
           }}
       >
