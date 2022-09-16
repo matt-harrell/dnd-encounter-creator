@@ -13,7 +13,7 @@ import {
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import PlayerTable from '../playersTable';
+import PlayerTable from '../PlayersTable/PlayersTable';
 import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
@@ -115,7 +115,7 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
         sx={{ 
             flexGrow: 1, 
             p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop:{xs:22,sm:12},
+            marginTop:{xs:22,sm:15,md:12},
             bgcolor:'secondary.main'
           }}
       >

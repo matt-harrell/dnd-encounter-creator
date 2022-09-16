@@ -28,6 +28,7 @@ interface PlayersState {
     mediumThreshold:number,
     hardThreshold:number,
     deadlyThreshold:number,
+    targetPlayerIndex:number | null,
 }
 
 
@@ -39,6 +40,7 @@ const initialState = {
     mediumThreshold:0,
     hardThreshold:0,
     deadlyThreshold:0,
+    targetPlayerIndex:null
 
 } as PlayersState;
 
@@ -67,9 +69,38 @@ const playersSlice = createSlice({
         },
         removePlayer(state,action){
             const playerToBeRemoved = action.payload;
+            state.targetPlayerIndex = null;
             if (playerToBeRemoved > -1){
              state.players.splice(playerToBeRemoved,1);
             }
+        },
+        setTargetEditPlayer(state,action){
+            state.targetPlayerIndex = action.payload;
+        },
+        setPlayerLevel(state,action){
+            state.players[state.targetPlayerIndex || 0].level = action.payload;
+        },
+        updateXPTheshholds(state){
+            const edittingPlayer = state.players[state.targetPlayerIndex || 0];
+            let playerlevel: keyof typeof XPThreshholds;
+            for (playerlevel in XPThreshholds) {
+                if(Number(playerlevel) === edittingPlayer.level){
+                    const { easy,medium, hard, deadly} = XPThreshholds[playerlevel];
+                    edittingPlayer.XPThreshhold = {
+                        easy:easy,
+                        medium:medium,
+                        hard:hard,
+                        deadly:deadly
+                    }
+                    break;
+                }   
+            }
+        },
+        setPlayerName(state,action){
+            state.players[state.targetPlayerIndex || 0].name = action.payload;
+        },
+        setPlayerClass(state,action){
+            state.players[state.targetPlayerIndex || 0].playerClass = action.payload;
         },
         changedifficulty(state,action){
             state.encounterDifficulty = action.payload
@@ -91,6 +122,7 @@ const playersSlice = createSlice({
 
 export const selectPlayers = (state: { players: { players: player[]; }; }) => state.players.players;
 export const selectLevels = (state: { players: { levels: number[]; }; }) => state.players.levels;
+export const selectEditPlayerIndex = (state: { players: { targetPlayerIndex: number | null; }; }) => state.players.targetPlayerIndex;
 export const selectEasyThreshhold = (state: { players: { easyThreshold: number; }; }) => state.players.easyThreshold;
 export const selectMediumThreshhold = (state: { players: { mediumThreshold: number; }; }) => state.players.mediumThreshold;
 export const selectHardThreshhold = (state: { players: { hardThreshold: number; }; }) => state.players.hardThreshold;
@@ -100,11 +132,17 @@ export const selectEncounterDifficulty = (state: { players: { encounterDifficult
 export const {
                 addPlayer,
                 removePlayer,
+                setTargetEditPlayer,
+                setPlayerLevel,
+                updateXPTheshholds,
+                setPlayerName,
+                setPlayerClass,
                 changedifficulty,
                 setEasyThreshhold,
                 setMediumThreshhold,
                 setHardThreshhold,
                 setDeadlyThreshhold,
             } = playersSlice.actions;
-
+            
 export default playersSlice.reducer;
+export type {player};

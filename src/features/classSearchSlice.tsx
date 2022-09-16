@@ -47,7 +47,7 @@ const ClassSearchSlice = createSlice({
     }
 })
 
-export const selectClassList = (state:any) => state.ClassSearch.playerClassList;
+export const selectClassList = (state: { ClassSearch: { playerClassList: string[] | []; }; }) => state.ClassSearch.playerClassList;
 export const selectSelectedClass = (state: { ClassSearch: { selectedClass: string; }; }) => state.ClassSearch.selectedClass;
 
 export const {addClass, addClassToClassList} = ClassSearchSlice.actions;
