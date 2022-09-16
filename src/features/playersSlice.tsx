@@ -143,5 +143,6 @@ export const {
                 setHardThreshhold,
                 setDeadlyThreshhold,
             } = playersSlice.actions;
-
+            
 export default playersSlice.reducer;
+export type {player};

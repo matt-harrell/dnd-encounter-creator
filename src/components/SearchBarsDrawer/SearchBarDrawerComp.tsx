@@ -13,7 +13,7 @@ import {
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import PlayerTable from '../playersTable';
+import PlayerTable from '../PlayersTable/PlayersTable';
 import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
