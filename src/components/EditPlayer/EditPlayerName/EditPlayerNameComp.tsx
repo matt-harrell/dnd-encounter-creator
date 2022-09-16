@@ -13,7 +13,7 @@ const EditPlayerNameComp = ({playerName,handlePlayerNameChange}:EditPlayerNameCo
             variant="standard"
             value={playerName}
             onChange={handlePlayerNameChange}
-            sx={{ width: '20em', bgcolor: 'white', padding: .3, borderRadius: 1 }}
+            sx={{ width: '100%', bgcolor: 'white', padding: .3, borderRadius: 1 }}
         />
     );
 }

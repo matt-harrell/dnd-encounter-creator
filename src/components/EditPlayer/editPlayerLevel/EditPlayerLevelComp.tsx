@@ -9,7 +9,7 @@ interface EditPlayerLevelCompProps {
 const EditPlayerLevelComp = ({editPlayerLevel,handleLevelChange,inputLevels}:EditPlayerLevelCompProps) => {
 
     return (
-        <FormControl sx={{ width: '5em' }}>
+        <FormControl sx={{ maxWidth: '5em' }}>
             <Select
                 labelId="playerLevel"
                 id="playerLevelSelect"

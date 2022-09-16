@@ -28,16 +28,16 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,handleRemoveClick,handle
                     {listOfPlayers.map((player, index) => (
                         <Paper elevation={4} sx={{ marginY: 2, padding: 1, bgcolor: 'primary.dark', color: 'white' }} key={index}>
                             <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                                <Grid item xs={6} md={4}>
+                                <Grid item xs={12} md={4}>
                                     {editPlayerIndex === index ? <EditPlayerName /> : <Typography component={'p'} variant={'body1'}>{player.name}</Typography>}
                                 </Grid>
-                                <Grid item xs={6} md={3}>
+                                <Grid item xs={8} md={3}>
                                     {editPlayerIndex === index ? <EditPlayerClass /> : <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>}
                                 </Grid>
-                                <Grid item xs={6} md={2}>
+                                <Grid item xs={4} md={2}>
                                     {editPlayerIndex === index ? <EditPlayerLevel /> : <Typography component={'p'} variant={'body1'}>Level: {player.level}</Typography>}
                                 </Grid>
-                                <Grid item xs={6} md={1} sx={{ textAlign: 'right' }}>
+                                <Grid item xs={6} md={1} sx={{ textAlign: {xs:'left',md:'right'} }}>
                                     <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color={editPlayerIndex === index ? 'success' : 'error'} variant="contained" disableElevation onClick={handleEditClick(index)} >
                                         {editPlayerIndex === index ? <TaskAltIcon /> : <EditIcon />}
                                     </Button>
