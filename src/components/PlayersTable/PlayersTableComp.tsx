@@ -38,7 +38,7 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,handleRemoveClick,handle
                                     {editPlayerIndex === index ? <EditPlayerLevel /> : <Typography component={'p'} variant={'body1'}>Level: {player.level}</Typography>}
                                 </Grid>
                                 <Grid item xs={6} md={1} sx={{ textAlign: {xs:'left',md:'right'} }}>
-                                    <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color={editPlayerIndex === index ? 'success' : 'error'} variant="contained" disableElevation onClick={handleEditClick(index)} >
+                                    <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color={editPlayerIndex === index ? 'success' : 'warning'} variant="contained" disableElevation onClick={handleEditClick(index)} >
                                         {editPlayerIndex === index ? <TaskAltIcon /> : <EditIcon />}
                                     </Button>
                                 </Grid>
