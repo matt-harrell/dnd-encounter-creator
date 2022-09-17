@@ -29,23 +29,73 @@ const encounterSlice = createSlice({
             state.listOfMonsters.splice(monsterToBeRemoved,1);
            }
         },
-        calcEncoutnerXP(state){
+        calcEncoutnerXP(state,action){
             const initialValue = 0;
             const listOfMonsters = state.listOfMonsters
             const monstersXP = listOfMonsters.map(monster => monster.xp);
             let calcEncounterXP =  monstersXP.reduce((prev,current) => prev + current,initialValue);
-            if (listOfMonsters.length <= 1) {
-                state.encounterExp = calcEncounterXP;
+            const numberOfPlayers = action.payload;
+            // let adjustedNumOfMonsters = listOfMonsters.length;
+            let monsterLevel = 0;
+
+            if(numberOfPlayers <= 2){
+                monsterLevel = 1;
+            }else if (numberOfPlayers >= 6){
+                monsterLevel = -1;
+            }
+
+            // create monster levels
+            if(listOfMonsters.length <= 1)  {
+                monsterLevel += 0;
             } else if(listOfMonsters.length === 2)  {
-                state.encounterExp = calcEncounterXP * 1.5;
+                monsterLevel += 1;
             } else if(listOfMonsters.length <= 6)  {
-                state.encounterExp = calcEncounterXP * 2;
+                monsterLevel += 2;
             } else if(listOfMonsters.length <= 10)  {
-                state.encounterExp = calcEncounterXP * 2.5;
+                monsterLevel += 3;
             } else if(listOfMonsters.length <= 14)  {
-                state.encounterExp = calcEncounterXP * 3;
+                monsterLevel += 4;
             } else if(listOfMonsters.length >= 15)  {
-                state.encounterExp = calcEncounterXP * 4;
+                monsterLevel += 5;
+            }
+            console.log("Monster Level " + monsterLevel);
+
+            // if (listOfMonsters.length <= 1) {
+            //     state.encounterExp = calcEncounterXP;
+            // } else if(listOfMonsters.length === 2)  {
+            //     state.encounterExp = calcEncounterXP * 1.5;
+            // } else if(listOfMonsters.length <= 6)  {
+            //     state.encounterExp = calcEncounterXP * 2;
+            // } else if(listOfMonsters.length <= 10)  {
+            //     state.encounterExp = calcEncounterXP * 2.5;
+            // } else if(listOfMonsters.length <= 14)  {
+            //     state.encounterExp = calcEncounterXP * 3;
+            // } else if(listOfMonsters.length >= 15)  {
+            //     state.encounterExp = calcEncounterXP * 4;
+            // }
+
+            switch (monsterLevel) {
+                case 0:
+                    state.encounterExp = calcEncounterXP;
+                    break;
+                case 1:
+                    state.encounterExp = calcEncounterXP * 1.5;
+                    break;
+                case 2:
+                    state.encounterExp = calcEncounterXP * 2;
+                    break;
+                case 3:
+                    state.encounterExp = calcEncounterXP * 2.5;
+                    break;
+                case 4:
+                    state.encounterExp = calcEncounterXP * 3;
+                    break;
+                case 5:
+                    state.encounterExp = calcEncounterXP * 4;
+                    break;
+
+                default:
+                    break;
             }
             
 
