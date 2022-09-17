@@ -73,7 +73,8 @@ const InfoDrawerComp = ({open,color,toggleDrawer}:InfoDrawerCompProps) => {
                   <li>Hard:300 XP</li>
                   <li>Deadly:400 XP</li>
                 </ul>
-                If these adventures are going against 3 Goblins with a total Monster XP value of 300 then the difficulty of the encounter would be Hard since our player Hard XP Threshold is 300.  
+                <Typography component={'p'} sx={{marginY:1}}>If these adventures are going against 3 Goblins with a total Monster XP value of 300 then the difficulty of the encounter would be Hard since our player Hard XP Threshold is 300.</Typography>
+                <Typography component={'p'} sx={{fontStyle:'italic'}}>Please note, the size of the party will affect the encounter XP. The guidelines were originally created for a party between 3-5 players. If a party has less than 3 players the encounter XP multiplier will be higher than normal. If the party has more than 5 players then the encounter XP multiplier will be lower than normal. Please see Party Size under the rules.</Typography>    
               </li>
               <li className="pb-1">You can also view a monster’s stat block by pressing the “View” button on the monster.</li>
             </ol>

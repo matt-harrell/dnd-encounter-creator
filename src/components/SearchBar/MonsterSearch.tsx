@@ -11,6 +11,7 @@ import { addMonster, calcEncoutnerXP } from '../../features/encounterSlice';
 
 import { AppDispatch } from '../../app/store';
 import { SelectChangeEvent } from "@mui/material";
+import { selectPlayers } from "../../features/playersSlice";
 
 
 
@@ -26,6 +27,8 @@ const MonsterSearch = () => {
     const loading = open && options.length === 0;
     const [disabled, setDisabled] = useState(false);
     const [label,setLabel] = useState('Monster') 
+
+    const players = useSelector(selectPlayers);
 
     useEffect(() => {
         dispatch(loadMonsterList())
@@ -79,7 +82,7 @@ const MonsterSearch = () => {
             try {
                 const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
                 dispatch(addMonster(monster))
-                dispatch(calcEncoutnerXP())
+                dispatch(calcEncoutnerXP(players.length))
 
             } catch (rejectedValueOrSerializedError) {
                 console.log(rejectedValueOrSerializedError)

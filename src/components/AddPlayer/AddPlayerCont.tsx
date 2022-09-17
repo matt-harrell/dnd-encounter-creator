@@ -1,9 +1,10 @@
 import { SelectChangeEvent } from "@mui/material";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { addClassToClassList, selectClassList, selectSelectedClass } from "../../features/classSearchSlice";
-import { addPlayer, selectLevels } from "../../features/playersSlice";
+import { calcEncoutnerXP } from "../../features/encounterSlice";
+import { addPlayer, selectLevels, selectPlayers } from "../../features/playersSlice";
 import AddPlayerComp from "./AddPlayerComp";
 
 const AddPlayerCont = () =>{
@@ -16,6 +17,13 @@ const AddPlayerCont = () =>{
 
     const [playerLevel, setPlayerLevel] = useState('');
     const [playerName, setPlayerName] = useState('');
+
+    const players = useSelector(selectPlayers);
+
+
+    useEffect(() =>{
+        dispatch(calcEncoutnerXP(players.length))
+    },[players.length,dispatch])
 
     const handleLevelChange = (event: SelectChangeEvent) => {
         setPlayerLevel(event.target.value)
@@ -34,6 +42,8 @@ const AddPlayerCont = () =>{
         setPlayerName('');
         setPlayerLevel('');
     }
+
+    
         
     
     return(

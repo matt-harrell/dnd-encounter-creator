@@ -6,12 +6,14 @@ import { scroller } from "react-scroll";
 import { selectListOfMonsters, removeMonster, calcEncoutnerXP, selectEncounterExp } from "../features/encounterSlice";
 import { setMonsterCardContent, setShowMonsterCard, showMonsterCard } from "../features/MonsterCardSlice";
 import CRToolTip from "./ToolTips/CRToolTip";
+import { selectPlayers } from "../features/playersSlice";
 
 
 const EcounterTable = () => {
     const monsterList = useSelector(selectListOfMonsters);
     const showMonster = useSelector(showMonsterCard);
     const encounterExp = useSelector(selectEncounterExp);
+    const players = useSelector(selectPlayers);
     const dispatch = useDispatch();
 
     const handleViewClick = (index:number) => async (e:any) =>{
@@ -29,7 +31,7 @@ const EcounterTable = () => {
             dispatch(setShowMonsterCard(false))
         }
         dispatch(removeMonster(index))
-        dispatch(calcEncoutnerXP()) // possibly refactor to use useeffect like in playersTable 
+        dispatch(calcEncoutnerXP(players.length))
     }
     
     return (
