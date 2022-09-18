@@ -58,8 +58,6 @@ const encounterSlice = createSlice({
             } else if(listOfMonsters.length >= 15)  {
                 monsterLevel += 5;
             }
-            console.log("Monster Level " + monsterLevel);
-
             // if (listOfMonsters.length <= 1) {
             //     state.encounterExp = calcEncounterXP;
             // } else if(listOfMonsters.length === 2)  {
