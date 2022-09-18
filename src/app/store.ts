@@ -4,6 +4,7 @@ import SearchMonsterListReducer from '../features/SearchMonsterListSlice';
 import encounterSliceReducer from '../features/encounterSlice';
 import playersSliceReducer from '../features/playersSlice';
 import ClassSearchSliceReducer from '../features/classSearchSlice';
+import SearchBarsDrawerSliceReducer from '../features/searchBarsDrawerSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     encounter:encounterSliceReducer,
     players:playersSliceReducer,
     ClassSearch:ClassSearchSliceReducer,
+    searchDrawer:SearchBarsDrawerSliceReducer,
   },
 });
 

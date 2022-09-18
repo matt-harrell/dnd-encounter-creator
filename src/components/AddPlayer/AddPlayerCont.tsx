@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { addClassToClassList, selectClassList, selectSelectedClass } from "../../features/classSearchSlice";
 import { calcEncoutnerXP } from "../../features/encounterSlice";
-import { addPlayer, selectLevels, selectPlayers } from "../../features/playersSlice";
+import { addPlayer,selectLevels, selectPlayers } from "../../features/playersSlice";
+import { changePlayerName, selectInputPlayerName, selectIsPlayerClassEmtpy, selectIsPlayerLevelEmtpy, selectIsPlayerNameEmtpy, togglePlayerClassEmtpy, togglePlayerLevelEmtpy, togglePlayerNameEmpty } from "../../features/searchBarsDrawerSlice";
 import AddPlayerComp from "./AddPlayerComp";
 
 const AddPlayerCont = () =>{
@@ -14,9 +15,12 @@ const AddPlayerCont = () =>{
     const inputLevels = useSelector(selectLevels);
     const playerClass = useSelector(selectSelectedClass);
     const playerClassList = useSelector(selectClassList);
+    const IsPlayerClassEmtpy = useSelector(selectIsPlayerClassEmtpy);
 
     const [playerLevel, setPlayerLevel] = useState('');
-    const [playerName, setPlayerName] = useState('');
+    const IsPlayerLevelEmtpy = useSelector(selectIsPlayerLevelEmtpy);
+    const playerName = useSelector(selectInputPlayerName);
+    const IsPlayerNameEmtpy = useSelector(selectIsPlayerNameEmtpy);
 
     const players = useSelector(selectPlayers);
 
@@ -25,22 +29,69 @@ const AddPlayerCont = () =>{
         dispatch(calcEncoutnerXP(players.length))
     },[players.length,dispatch])
 
+    useEffect(() =>{
+        if (playerName !== ''){
+            dispatch(togglePlayerNameEmpty(false))
+        }
+    },[playerName,dispatch])
+
+    useEffect(() =>{
+        if (playerClass !== '' || playerClass !== null){
+            dispatch(togglePlayerClassEmtpy(false))
+        }
+    },[playerClass,dispatch])
+
+    useEffect(() =>{
+        if (playerLevel !== ''){
+            dispatch(togglePlayerLevelEmtpy(false))
+        }
+    },[playerLevel,dispatch])
+
     const handleLevelChange = (event: SelectChangeEvent) => {
         setPlayerLevel(event.target.value)
     }
     
     const handlePlayerNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-        setPlayerName(event.target.value)
+        dispatch(changePlayerName(event.target.value));
     }
 
     const handleAddPlayerClick = () => {
-        dispatch(addPlayer({name:playerName,playerClass:playerClass,level:Number(playerLevel),XPThreshhold:{easy:0,medium:0,hard:0,deadly:0}}));
-        const isExisting = playerClassList.some((option:string) => playerClass === option);
-          if (!isExisting) {
-            dispatch(addClassToClassList(playerClass))
-          }
-        setPlayerName('');
-        setPlayerLevel('');
+        if (playerName === '' || playerClass === ('' || null) || playerLevel === ''){
+            if(playerName === ''){
+                dispatch(togglePlayerNameEmpty(true))
+            }else if(IsPlayerNameEmtpy){
+                dispatch(togglePlayerNameEmpty(false))
+            }
+            if(playerClass === '' || playerClass === null){
+                dispatch(togglePlayerClassEmtpy(true))
+            } else if(IsPlayerClassEmtpy){
+                dispatch(togglePlayerClassEmtpy(false))
+            }
+            if(playerLevel === ''){
+                dispatch(togglePlayerLevelEmtpy(true))
+            } else if(IsPlayerLevelEmtpy){
+                dispatch(togglePlayerLevelEmtpy(false))
+            }
+        } else {
+            if(IsPlayerNameEmtpy){
+                dispatch(togglePlayerNameEmpty(false));
+            }
+            if(IsPlayerClassEmtpy){
+                dispatch(togglePlayerClassEmtpy(false))
+            }
+            if(IsPlayerLevelEmtpy){
+                dispatch(togglePlayerLevelEmtpy(false))
+            }
+
+            dispatch(addPlayer({ name: playerName, playerClass: playerClass, level: Number(playerLevel), XPThreshhold: { easy: 0, medium: 0, hard: 0, deadly: 0 } }));
+            const isExisting = playerClassList.some((option: string) => playerClass === option);
+            if (!isExisting) {
+                dispatch(addClassToClassList(playerClass))
+            }
+            dispatch(changePlayerName(''));
+            setPlayerLevel('');
+        }
+        
     }
 
     
@@ -48,10 +99,12 @@ const AddPlayerCont = () =>{
     
     return(
         <AddPlayerComp
-        // need to make interface in AddPlayerComp
             inputLevels = {inputLevels}
             playerLevel = {playerLevel}
             playerName = {playerName}
+            playerClass={playerClass}
+            IsPlayerLevelEmtpy={IsPlayerLevelEmtpy}
+            IsPlayerNameEmtpy={IsPlayerNameEmtpy}
             handleLevelChange = {handleLevelChange}
             handlePlayerNameChange = {handlePlayerNameChange}
             handleAddPlayerClick = {handleAddPlayerClick}
