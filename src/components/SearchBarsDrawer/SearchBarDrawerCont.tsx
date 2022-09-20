@@ -13,7 +13,7 @@ const SearchBarDrawerCont = () => {
 
     useEffect(()=>{
         switch (encounterDifficulty) {
-            case "No Monsters Added":
+            case "No Monsters":
                 setColor("primary")
                 break;
             case "Easy":
