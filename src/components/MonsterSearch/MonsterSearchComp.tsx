@@ -29,9 +29,24 @@ const MonsterSearchComp = ({searchedMonster,cRInpit,options,open,loading,disable
     return (
       <Box sx={{paddingX:1, marginY:5}}>
         <Grid container spacing={1}>
-          <Grid item xs={8}>
+        <Grid item xs={12}>
+              <FormControl sx={{width:'100%'}}>
+                  <InputLabel id="challegeRating">Challenge Rating</InputLabel>
+                  <Select
+                      labelId="challegeRating"
+                      id="challegeRatingSelect"
+                      value={cRInpit}
+                      label="CR"
+                      onChange={handleCRChange}
+                      sx={{bgcolor:'white',borderRadius:1}}
+                  >   
+                      {challegeRatingsList.map((CR:number | string,index:number) => <MenuItem key={index} value={CR}>{CR}</MenuItem> )} 
+                  </Select>
+              </FormControl>
+          </Grid>
+          <Grid item xs={12}>
             <Autocomplete
-              disabled={disabled}
+              disabled={cRInpit === '' ? true : disabled}
               open={open}
               onOpen={handleOpen}
               onClose={handleClose}
@@ -47,24 +62,9 @@ const MonsterSearchComp = ({searchedMonster,cRInpit,options,open,loading,disable
               renderInput={(params) => <TextField variant='standard' {...params} label={label} />}
             />
           </Grid>
-          <Grid item xs={4}>
-              <FormControl sx={{width:'100%'}}>
-                  <InputLabel id="challegeRating">CR</InputLabel>
-                  <Select
-                      labelId="challegeRating"
-                      id="challegeRatingSelect"
-                      value={cRInpit}
-                      label="CR"
-                      onChange={handleCRChange}
-                      sx={{bgcolor:'white',borderRadius:1}}
-                  >   
-                      {challegeRatingsList.map((CR:number | string,index:number) => <MenuItem key={index} value={CR}>{CR}</MenuItem> )} 
-                  </Select>
-              </FormControl>
-          </Grid>
         </Grid>
         
-        <Button variant="contained" color='danger' disableElevation onClick={handleAddMonsterClick}>
+        <Button variant="contained" color='danger' disableElevation onClick={handleAddMonsterClick} disabled={searchedMonster === null ? true : false}>
           Add Monster
         </Button>
       </Box>

@@ -31,7 +31,7 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,handleRemoveClick,handle
                                 <Grid item xs={12} md={4}>
                                     {editPlayerIndex === index ? <EditPlayerName /> : <Typography component={'p'} variant={'body1'}>{player.name}</Typography>}
                                 </Grid>
-                                <Grid item xs={8} md={3}>
+                                <Grid item xs={8} md={4}>
                                     {editPlayerIndex === index ? <EditPlayerClass /> : <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>}
                                 </Grid>
                                 <Grid item xs={4} md={2}>

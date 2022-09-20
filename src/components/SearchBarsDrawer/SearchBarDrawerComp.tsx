@@ -18,7 +18,7 @@ import EcounterTable from '../encounterTable';
 import MonsterCard from '../MonsterCard/MonsterCard';
 import AddPlayerCont from '../AddPlayer/AddPlayerCont';
 import DifficultyDisplay from '../DifficultyDisplay/DifficultyDisplay';
-import MonsterSearch from '../SearchBar/MonsterSearch';
+import MonsterSearch from '../MonsterSearch/MonsterSearch';
 import { AppBarColor } from './SearchBarDrawerCont';
 import InfoDrawer from '../InfoDrawer/InfoDrawer';
 

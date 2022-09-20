@@ -1,4 +1,4 @@
-import { Grid, TextField, FormControl, InputLabel, Select, Button, SelectChangeEvent, MenuItem } from "@mui/material";
+import { Grid, TextField, FormControl, InputLabel, Select, Button, SelectChangeEvent, MenuItem, Typography } from "@mui/material";
 
 
 import ClassSearch from "../ClassSearch";
@@ -7,6 +7,9 @@ interface AddPlayerCompProps {
     inputLevels:number[];
     playerLevel:string;
     playerName:string;
+    playerClass:string;
+    IsPlayerLevelEmtpy:boolean;
+    IsPlayerNameEmtpy:boolean;
     handleLevelChange: (event: SelectChangeEvent) => void;
     handlePlayerNameChange: (event:React.ChangeEvent<HTMLInputElement>) => void;
     handleAddPlayerClick: () => void;
@@ -16,7 +19,7 @@ interface AddPlayerCompProps {
 
 
 
-const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange, handlePlayerNameChange, handleAddPlayerClick  }:AddPlayerCompProps) =>{
+const AddPlayerComp = ({inputLevels, playerLevel, playerName,IsPlayerLevelEmtpy,IsPlayerNameEmtpy, handleLevelChange, handlePlayerNameChange, handleAddPlayerClick  }:AddPlayerCompProps) =>{
 
     return (
 
@@ -30,6 +33,7 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
                         onChange={handlePlayerNameChange}
                         sx={{width:'100%', bgcolor:'white',padding:.3,borderRadius:1}} 
                     />
+                    {IsPlayerNameEmtpy && <Typography component='p' variant='caption' color='error'>Player Name required</Typography>}
                 </Grid>
                 <Grid item xs={8}>
                     <ClassSearch/>
@@ -48,6 +52,7 @@ const AddPlayerComp = ({inputLevels, playerLevel, playerName, handleLevelChange,
                             {inputLevels.map((level:number,index:number) => <MenuItem key={index} value={level}>{level}</MenuItem> )} 
                         </Select>
                     </FormControl>
+                    {IsPlayerLevelEmtpy && <Typography component='p' variant='caption' color='error'>Player Level required</Typography>}
                 </Grid>
 
                 <Grid item xs={12}>
