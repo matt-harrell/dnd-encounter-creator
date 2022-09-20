@@ -1,7 +1,9 @@
 import { useSelector,useDispatch } from "react-redux";
 import { 
+    findNextHighestPlayer,
     removePlayer,
     selectEditPlayerIndex,
+    selectHighestPlayerLevel,
     selectPlayers,
     setTargetEditPlayer, 
 } from "../../features/playersSlice";
@@ -14,13 +16,21 @@ const PlayerTable = () => {
     const listOfPlayers = useSelector(selectPlayers);
     const editPlayerIndex = useSelector(selectEditPlayerIndex);
     const playerClassList = useSelector(selectClassList);
+    const highestPlayerLevel = useSelector(selectHighestPlayerLevel)
 
     // when edtting a player
     const playerIndex = useSelector(selectEditPlayerIndex);
     const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;
 
+
     const handleRemoveClick = (index:number) => (e:any) =>{
-        dispatch(removePlayer(index))
+        const playerTobeRemoved = listOfPlayers[index];
+        if(playerTobeRemoved.level === highestPlayerLevel){
+            dispatch(removePlayer(index))
+            dispatch(findNextHighestPlayer())
+        } else{
+            dispatch(removePlayer(index))
+        }
     }
 
     const handleEditClick = (index:number) => (e:any) =>{
