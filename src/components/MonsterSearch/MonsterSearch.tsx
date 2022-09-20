@@ -73,6 +73,12 @@ const MonsterSearch = () => {
         }
     },[searchMonsterList.length])
 
+    // useEffect(() => {
+    //     if(cRInpit === ''){
+    //         setDisabled(true)
+    //     }
+    // },[cRInpit])
+
     const handleChange = (e: any,searchedMonster: string | null) => {
         setSearchedMonster(searchedMonster);
     }
