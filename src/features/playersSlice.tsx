@@ -128,8 +128,6 @@ const playersSlice = createSlice({
                     }
                 }
 
-                console.log(newHighestLevelPlayer.level);
-
                 state.highestPlayerLevel = newHighestLevelPlayer.level
             } else {
                 state.highestPlayerLevel = 0;

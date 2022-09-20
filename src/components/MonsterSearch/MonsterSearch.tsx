@@ -11,7 +11,7 @@ import { addMonster, calcEncoutnerXP } from '../../features/encounterSlice';
 
 import { AppDispatch } from '../../app/store';
 import { SelectChangeEvent } from "@mui/material";
-import { selectPlayers } from "../../features/playersSlice";
+import { selectHighestPlayerLevel, selectPlayers } from "../../features/playersSlice";
 
 
 
@@ -26,7 +26,8 @@ const MonsterSearch = () => {
     const [open, setOpen] = useState(false);
     const loading = open && options.length === 0;
     const [disabled, setDisabled] = useState(false);
-    const [label,setLabel] = useState('Monster') 
+    const [label,setLabel] = useState('Monster');
+    const highestPlayerLevel = useSelector(selectHighestPlayerLevel); 
 
     const players = useSelector(selectPlayers);
 
@@ -73,11 +74,15 @@ const MonsterSearch = () => {
         }
     },[searchMonsterList.length])
 
-    // useEffect(() => {
-    //     if(cRInpit === ''){
-    //         setDisabled(true)
-    //     }
-    // },[cRInpit])
+    useEffect(() => {
+        if(highestPlayerLevel === 0){
+            setCRInput('');
+        } else{
+            setCRInput(String(highestPlayerLevel));
+        }
+    },[highestPlayerLevel])
+
+    
 
     const handleChange = (e: any,searchedMonster: string | null) => {
         setSearchedMonster(searchedMonster);
