@@ -14,11 +14,13 @@ interface PlayerTableCompProps{
     highestPlayerLevel:number;
     handleRemoveClick:(index: number) => (e: any) => void;
     handleEditClick:(index: number) => (e: any) => void;
+    handleMouseEnter:(index: number) => (e: any) => void;
+    handleMouseLeave:(index: number) => (e: any) => void;
 
 }
 
 
-const PlayerTableComp = ({listOfPlayers,editPlayerIndex,highestPlayerLevel,handleRemoveClick,handleEditClick}:PlayerTableCompProps) => {
+const PlayerTableComp = ({listOfPlayers,editPlayerIndex,highestPlayerLevel,handleRemoveClick,handleEditClick,handleMouseEnter,handleMouseLeave}:PlayerTableCompProps) => {
 
 
     return (
@@ -35,7 +37,7 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,highestPlayerLevel,handl
                         </Grid>
                     </Grid>
                     {listOfPlayers.map((player, index) => (
-                        <Paper elevation={4} sx={{ marginY: 2, padding: 1, bgcolor: 'primary.dark', color: 'white' }} key={index}>
+                        <Paper elevation={player.elevation} sx={{ marginY: 2, padding: 1, bgcolor: 'primary.dark', color: 'white' }} key={index} onMouseEnter={handleMouseEnter(index)} onMouseLeave={handleMouseLeave(index)}>
                             <Grid container spacing={1} sx={{ alignItems: 'center' }}>
                                 <Grid item xs={12} md={4}>
                                     {editPlayerIndex === index ? <EditPlayerName /> : <Typography component={'p'} variant={'body1'}>{player.name}</Typography>}

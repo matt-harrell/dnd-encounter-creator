@@ -1,5 +1,6 @@
 import { useSelector,useDispatch } from "react-redux";
 import { 
+    changeElevation,
     findNextHighestPlayer,
     removePlayer,
     selectEditPlayerIndex,
@@ -16,11 +17,19 @@ const PlayerTable = () => {
     const listOfPlayers = useSelector(selectPlayers);
     const editPlayerIndex = useSelector(selectEditPlayerIndex);
     const playerClassList = useSelector(selectClassList);
-    const highestPlayerLevel = useSelector(selectHighestPlayerLevel)
+    const highestPlayerLevel = useSelector(selectHighestPlayerLevel);
 
     // when edtting a player
     const playerIndex = useSelector(selectEditPlayerIndex);
-    const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;
+    const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;    
+
+    const handleMouseEnter = (index:number) => (e:any) => {
+        dispatch(changeElevation(index))
+    }
+
+    const handleMouseLeave = (index:number) => (e:any) => {
+        dispatch(changeElevation(index))
+    }
 
 
     const handleRemoveClick = (index:number) => (e:any) =>{
@@ -56,6 +65,8 @@ const PlayerTable = () => {
             highestPlayerLevel={highestPlayerLevel}
             handleRemoveClick={handleRemoveClick}
             handleEditClick={handleEditClick}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
         />
     );
 }
