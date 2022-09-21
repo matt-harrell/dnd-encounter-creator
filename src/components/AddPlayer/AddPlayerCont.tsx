@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { addClassToClassList, selectClassList, selectSelectedClass } from "../../features/classSearchSlice";
 import { calcEncoutnerXP } from "../../features/encounterSlice";
-import { addPlayer,selectLevels, selectPlayers } from "../../features/playersSlice";
+import { addPlayer,selectLevels, selectPlayers,selectHighestPlayerLevel,changeHighestPlayerLevel } from "../../features/playersSlice";
 import { changePlayerName, selectInputPlayerName, selectIsPlayerClassEmtpy, selectIsPlayerLevelEmtpy, selectIsPlayerNameEmtpy, togglePlayerClassEmtpy, togglePlayerLevelEmtpy, togglePlayerNameEmpty } from "../../features/searchBarsDrawerSlice";
 import AddPlayerComp from "./AddPlayerComp";
 
@@ -21,6 +21,7 @@ const AddPlayerCont = () =>{
     const IsPlayerLevelEmtpy = useSelector(selectIsPlayerLevelEmtpy);
     const playerName = useSelector(selectInputPlayerName);
     const IsPlayerNameEmtpy = useSelector(selectIsPlayerNameEmtpy);
+    const highestPlayerLevel = useSelector(selectHighestPlayerLevel);
 
     const players = useSelector(selectPlayers);
 
@@ -88,6 +89,11 @@ const AddPlayerCont = () =>{
             if (!isExisting) {
                 dispatch(addClassToClassList(playerClass))
             }
+
+            if (Number(playerLevel) > highestPlayerLevel){
+                dispatch(changeHighestPlayerLevel(Number(playerLevel)))
+            }
+            
             dispatch(changePlayerName(''));
             setPlayerLevel('');
         }

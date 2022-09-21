@@ -11,13 +11,14 @@ import EditPlayerLevel from "../EditPlayer/editPlayerLevel/editPlayerLevel";
 interface PlayerTableCompProps{
     listOfPlayers:player[];
     editPlayerIndex: number | null;
+    highestPlayerLevel:number;
     handleRemoveClick:(index: number) => (e: any) => void;
     handleEditClick:(index: number) => (e: any) => void;
 
 }
 
 
-const PlayerTableComp = ({listOfPlayers,editPlayerIndex,handleRemoveClick,handleEditClick}:PlayerTableCompProps) => {
+const PlayerTableComp = ({listOfPlayers,editPlayerIndex,highestPlayerLevel,handleRemoveClick,handleEditClick}:PlayerTableCompProps) => {
 
 
     return (
@@ -25,6 +26,14 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,handleRemoveClick,handle
 
             {listOfPlayers.length !== 0 && (
                 <>
+                    <Grid container spacing={1} sx={{marginTop:2}}>
+                        <Grid item xs={12} sm={'auto'}>
+                            <Typography component={'h2'} variant={'h5'}>Players <Typography sx={{ display: { xs: 'none', sm: 'inline' } }} component={'span'} variant={'h5'}>|</Typography></Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={'auto'}>
+                            <Typography component={'h2'} variant={'h5'}>Highest Level: {highestPlayerLevel}</Typography>
+                        </Grid>
+                    </Grid>
                     {listOfPlayers.map((player, index) => (
                         <Paper elevation={4} sx={{ marginY: 2, padding: 1, bgcolor: 'primary.dark', color: 'white' }} key={index}>
                             <Grid container spacing={1} sx={{ alignItems: 'center' }}>

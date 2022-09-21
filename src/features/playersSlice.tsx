@@ -5,8 +5,7 @@ interface XPThreshhold {
     easy:number;
     medium:number,
     hard:number,
-    deadly:number,
-    
+    deadly:number,  
 }
 
 interface player {
@@ -25,6 +24,7 @@ interface PlayersState {
     hardThreshold:number,
     deadlyThreshold:number,
     targetPlayerIndex:number | null,
+    highestPlayerLevel:number,
 }
 
 
@@ -36,7 +36,8 @@ const initialState = {
     mediumThreshold:0,
     hardThreshold:0,
     deadlyThreshold:0,
-    targetPlayerIndex:null
+    targetPlayerIndex:null,
+    highestPlayerLevel:0,
 
 } as PlayersState;
 
@@ -113,6 +114,27 @@ const playersSlice = createSlice({
         setDeadlyThreshhold(state,action){
             state.deadlyThreshold = action.payload;
         },
+        changeHighestPlayerLevel(state,action){
+            state.highestPlayerLevel = action.payload;
+        },
+        findNextHighestPlayer(state) {
+
+            if (state.players.length !== 0) {
+                let newHighestLevelPlayer = state.players[0];
+
+                for (let i = 1; i < state.players.length; i++) {
+                    if (state.players[i].level > newHighestLevelPlayer.level) {
+                        newHighestLevelPlayer = state.players[i];
+                    }
+                }
+
+                state.highestPlayerLevel = newHighestLevelPlayer.level
+            } else {
+                state.highestPlayerLevel = 0;
+            }
+
+
+        },
     },
 })
 
@@ -125,6 +147,7 @@ export const selectMediumThreshhold = (state: { players: { mediumThreshold: numb
 export const selectHardThreshhold = (state: { players: { hardThreshold: number; }; }) => state.players.hardThreshold;
 export const selectDeadlyThreshhold = (state: { players: { deadlyThreshold: number; }; }) => state.players.deadlyThreshold;
 export const selectEncounterDifficulty = (state: { players: { encounterDifficulty: string; }; }) => state.players.encounterDifficulty;
+export const selectHighestPlayerLevel = (state: { players: { highestPlayerLevel: number; }; }) => state.players.highestPlayerLevel;
 
 export const {
                 addPlayer,
@@ -139,6 +162,8 @@ export const {
                 setMediumThreshhold,
                 setHardThreshhold,
                 setDeadlyThreshhold,
+                changeHighestPlayerLevel,
+                findNextHighestPlayer,
             } = playersSlice.actions;
             
 export default playersSlice.reducer;
