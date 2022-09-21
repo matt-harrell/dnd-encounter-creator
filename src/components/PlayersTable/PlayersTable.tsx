@@ -53,6 +53,7 @@ const PlayerTable = () => {
         <PlayerTableComp
             listOfPlayers={listOfPlayers}
             editPlayerIndex={editPlayerIndex}
+            highestPlayerLevel={highestPlayerLevel}
             handleRemoveClick={handleRemoveClick}
             handleEditClick={handleEditClick}
         />
