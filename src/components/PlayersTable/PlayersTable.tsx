@@ -1,6 +1,7 @@
 import { useSelector,useDispatch } from "react-redux";
 import { 
-    changeElevation,
+    makePlayerEditable,
+    makePlayerNOTEditable,
     findNextHighestPlayer,
     removePlayer,
     selectEditPlayerIndex,
@@ -24,11 +25,11 @@ const PlayerTable = () => {
     const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;    
 
     const handleMouseEnter = (index:number) => (e:any) => {
-        dispatch(changeElevation(index))
+        dispatch(makePlayerEditable(index))
     }
 
     const handleMouseLeave = (index:number) => (e:any) => {
-        dispatch(changeElevation(index))
+        dispatch(makePlayerNOTEditable(index))
     }
 
 
@@ -50,7 +51,8 @@ const PlayerTable = () => {
                  dispatch(addClassToClassList(edittingPlayerClass));
             }
             
-            dispatch(setTargetEditPlayer(null))
+            dispatch(setTargetEditPlayer(null));
+            dispatch(makePlayerNOTEditable(index))
             
         } else {
             dispatch(setTargetEditPlayer(index))

@@ -13,7 +13,10 @@ interface player {
     playerClass:string,
     level:number,
     XPThreshhold:XPThreshhold,
-    elevation:number;
+    UIElements:{
+        elevation:number,
+        showEditX:boolean,
+    }
 }
 
 interface PlayersState {
@@ -48,7 +51,7 @@ const playersSlice = createSlice({
     reducers:{
         addPlayer(state,action:PayloadAction<player>){
             const {name,playerClass,level} = action.payload;
-            state.players.push({name:name,playerClass:playerClass,level:level, XPThreshhold:{easy:0,medium:0,hard:0,deadly:0},elevation:0})
+            state.players.push({name:name,playerClass:playerClass,level:level, XPThreshhold:{easy:0,medium:0,hard:0,deadly:0},UIElements:{elevation:0,showEditX:false}})
             const addedPlayer = state.players[state.players.length - 1];
             let playerlevel: keyof typeof XPThreshholds;
             for (playerlevel in XPThreshholds) {
@@ -136,13 +139,13 @@ const playersSlice = createSlice({
 
 
         },
-        changeElevation(state,action){
-            if(state.players[action.payload].elevation === 0){
-                state.players[action.payload].elevation = 4;
-            }else{
-                state.players[action.payload].elevation = 0;
-            }
-            
+        makePlayerEditable(state, action) {
+            state.players[action.payload].UIElements.elevation = 4;
+            state.players[action.payload].UIElements.showEditX = true;
+        },
+        makePlayerNOTEditable(state,action){
+            state.players[action.payload].UIElements.elevation = 0;
+            state.players[action.payload].UIElements.showEditX = false; 
         }
     },
 })
@@ -173,7 +176,8 @@ export const {
                 setDeadlyThreshhold,
                 changeHighestPlayerLevel,
                 findNextHighestPlayer,
-                changeElevation,
+                makePlayerEditable,
+                makePlayerNOTEditable,
             } = playersSlice.actions;
             
 export default playersSlice.reducer;
