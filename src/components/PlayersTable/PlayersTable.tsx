@@ -7,11 +7,13 @@ import {
     selectEditPlayerIndex,
     selectHighestPlayerLevel,
     selectPlayers,
-    setTargetEditPlayer, 
+    setTargetEditPlayer,
+    selectEasyThreshhold, 
 } from "../../features/playersSlice";
 import { AppDispatch } from "../../app/store";
 import { addClassToClassList, selectClassList } from "../../features/classSearchSlice";
 import PlayerTableComp from "./PlayersTableComp";
+import { useEffect } from "react";
 
 const PlayerTable = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -19,10 +21,15 @@ const PlayerTable = () => {
     const editPlayerIndex = useSelector(selectEditPlayerIndex);
     const playerClassList = useSelector(selectClassList);
     const highestPlayerLevel = useSelector(selectHighestPlayerLevel);
+    const easyThreshhold = useSelector(selectEasyThreshhold);
 
     // when edtting a player
     const playerIndex = useSelector(selectEditPlayerIndex);
-    const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;    
+    const edittingPlayerClass = listOfPlayers[playerIndex || 0]?.playerClass;
+    
+    useEffect(() => {
+        dispatch(findNextHighestPlayer())
+    },[dispatch, easyThreshhold])
 
     const handleMouseEnter = (index:number) => (e:any) => {
         dispatch(makePlayerEditable(index))
@@ -32,12 +39,10 @@ const PlayerTable = () => {
         dispatch(makePlayerNOTEditable(index))
     }
 
-
     const handleRemoveClick = (index:number) => (e:any) =>{
         const playerTobeRemoved = listOfPlayers[index];
         if(playerTobeRemoved.level === highestPlayerLevel){
             dispatch(removePlayer(index))
-            dispatch(findNextHighestPlayer())
         } else{
             dispatch(removePlayer(index))
         }

@@ -118,9 +118,6 @@ const playersSlice = createSlice({
         setDeadlyThreshhold(state,action){
             state.deadlyThreshold = action.payload;
         },
-        changeHighestPlayerLevel(state,action){
-            state.highestPlayerLevel = action.payload;
-        },
         findNextHighestPlayer(state) {
 
             if (state.players.length !== 0) {
@@ -174,7 +171,6 @@ export const {
                 setMediumThreshhold,
                 setHardThreshhold,
                 setDeadlyThreshhold,
-                changeHighestPlayerLevel,
                 findNextHighestPlayer,
                 makePlayerEditable,
                 makePlayerNOTEditable,
