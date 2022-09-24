@@ -84,7 +84,7 @@ const AddPlayerCont = () =>{
                 dispatch(togglePlayerLevelEmtpy(false))
             }
 
-            dispatch(addPlayer({ name: playerName, playerClass: playerClass, level: Number(playerLevel), XPThreshhold: { easy: 0, medium: 0, hard: 0, deadly: 0 } }));
+            dispatch(addPlayer({ name: playerName, playerClass: playerClass, level: Number(playerLevel), XPThreshhold: { easy: 0, medium: 0, hard: 0, deadly: 0 },UIElements:{elevation:0,showEditX:false}}));
             const isExisting = playerClassList.some((option: string) => playerClass === option);
             if (!isExisting) {
                 dispatch(addClassToClassList(playerClass))

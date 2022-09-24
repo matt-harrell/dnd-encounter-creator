@@ -114,30 +114,23 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
         component="main"
         sx={{ 
             flexGrow: 1, 
-            p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop:{xs:22,sm:15,md:12},
+            padding: {xs:1,md:3}, width: { sm: `calc(100% - ${drawerWidth}px)` },
+            marginTop:{xs:24,sm:17,md:12},
             bgcolor:'secondary.main'
           }}
       >
-        <Grid container spacing={2} paddingX={2}>
-            <Grid item xs={12}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                <PlayerTable/>
-                </Grid>
-            </Grid>
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <PlayerTable />
+          </Grid>
 
-            <Grid item xs={12}>
-            <Grid container spacing={2} sx={{paddingY:5}}>
-                <Grid item xs={12}>
-                <EcounterTable/>
-                </Grid>
-                <Grid item xs={12}>
-                <MonsterCard/>
-                </Grid>
-            </Grid>
-            </Grid>     
+          <Grid item xs={12} md={6}>
+            <EcounterTable />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MonsterCard />
+          </Grid>
 
         </Grid>
       </Box>
