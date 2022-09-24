@@ -120,24 +120,25 @@ const SearchBarDrawerComp = ({color,mobileOpen,handleDrawerToggle, handleDrawerC
           }}
       >
         <Grid container spacing={2} paddingX={2}>
-            <Grid item xs={12}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                <PlayerTable/>
-                </Grid>
-            </Grid>
-            </Grid>
+          <Grid item xs={12} md={6}>
+            {/* <Grid container spacing={2}> */}
+              {/* <Grid item xs={12}> */}
+                <PlayerTable />
+              {/* </Grid> */}
+            {/* </Grid> */}
+          </Grid>
 
-            <Grid item xs={12}>
-            <Grid container spacing={2} sx={{paddingY:5}}>
-                <Grid item xs={12}>
-                <EcounterTable/>
-                </Grid>
-                <Grid item xs={12}>
-                <MonsterCard/>
-                </Grid>
-            </Grid>
-            </Grid>     
+          <Grid item xs={12} md={6}>
+            {/* <Grid container spacing={2} sx={{ paddingY: 5 }}> */}
+              {/* <Grid item xs={12}> */}
+                <EcounterTable />
+              {/* </Grid> */}
+            {/* </Grid> */}
+          </Grid>
+
+          <Grid item xs={12}>
+            <MonsterCard />
+          </Grid>
 
         </Grid>
       </Box>
