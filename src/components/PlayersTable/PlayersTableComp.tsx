@@ -39,23 +39,23 @@ const PlayerTableComp = ({listOfPlayers,editPlayerIndex,highestPlayerLevel,handl
                     {listOfPlayers.map((player, index) => (
                         <Paper elevation={player.UIElements.elevation} sx={{ marginY: 2, padding: 1, bgcolor: 'primary.dark', color: 'white',maxWidth:'40em' }} key={index} onMouseEnter={editPlayerIndex === index ? undefined : handleMouseEnter(index)} onMouseLeave={editPlayerIndex === index ? undefined : handleMouseLeave(index)}>
                             <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                                <Grid item xs={12} md={4}>
+                                <Grid item xs={12} lg={4}>
                                     {editPlayerIndex === index ? <EditPlayerName /> : <Typography component={'p'} variant={'body1'}>{player.name}</Typography>}
                                 </Grid>
-                                <Grid item xs={8} md={4} sx={{textAlign:{xs:'left',md:'center'}}}>
+                                <Grid item xs={8} lg={4} sx={{textAlign:{xs:'left',lg:'center'}}}>
                                     {editPlayerIndex === index ? <EditPlayerClass /> : <Typography component={'p'} variant={'body1'}>{player.playerClass}</Typography>}
                                 </Grid>
-                                <Grid item xs={4} md={player.UIElements.showEditX ? 2 : 4} sx={{textAlign:'right'}}>
+                                <Grid item xs={4} lg={player.UIElements.showEditX ? 2 : 4} sx={{textAlign:'right'}}>
                                     {editPlayerIndex === index ? <EditPlayerLevel /> : <Typography component={'p'} variant={'body1'}>Level: {player.level}</Typography>}
                                 </Grid>
-                                <Grid item xs={6} md={1} sx={{ textAlign: {xs:'left',md:'right'},display:player.UIElements.showEditX ? 'block' : 'none' }}>
+                                <Grid item xs={6} lg={1} sx={{ textAlign: {xs:'left',lg:'right'},display:player.UIElements.showEditX ? 'block' : 'none' }}>
                                     <Grow in={player.UIElements.showEditX}>
                                         <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color={editPlayerIndex === index ? 'success' : 'warning'} variant="contained" disableElevation onClick={handleEditClick(index)} >
                                             {editPlayerIndex === index ? <TaskAltIcon /> : <EditIcon />}
                                         </Button>
                                     </Grow>
                                 </Grid>
-                                <Grid item xs={6} md={1} sx={{ textAlign: 'right', display:player.UIElements.showEditX ? 'block' : 'none' }}>
+                                <Grid item xs={6} lg={1} sx={{ textAlign: 'right', display:player.UIElements.showEditX ? 'block' : 'none' }}>
                                     <Grow in={player.UIElements.showEditX}>
                                         <Button sx={{ padding: '6px',minWidth: 'fit-content' }} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)}>
                                             <CloseIcon />

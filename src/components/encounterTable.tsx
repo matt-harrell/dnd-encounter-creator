@@ -58,23 +58,23 @@ const EcounterTable = () => {
             {monsterList.map((monster,index) => (
                 <Paper elevation={mouseOnMonster === index ? 4 : 0} sx={{marginY:2,padding:1,bgcolor:'danger.main',maxWidth:'40em'}} key={index} onMouseEnter={handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                     <Grid container spacing={1}  sx={{alignItems:'center'}} color={'white'}>
-                        <Grid item xs={12} md={mouseOnMonster === index ? 4 : 5}>
+                        <Grid item xs={12} lg={mouseOnMonster === index ? 4 : 5}>
                             <Typography>{monster.name}</Typography>
                         </Grid>
-                        <Grid item xs={6} md={mouseOnMonster === index ? 3 : 4}>
+                        <Grid item xs={6} lg={mouseOnMonster === index ? 3 : 4}>
                             <Typography>XP: {monster.xp}</Typography>
                         </Grid>
-                        <Grid item xs={6} md={mouseOnMonster === index ? 2 : 3} sx={{textAlign:{xs:'right',md:mouseOnMonster === index ? 'left' : 'right'}}}>
+                        <Grid item xs={6} lg={mouseOnMonster === index ? 2 : 3} sx={{textAlign:{xs:'right',md:mouseOnMonster === index ? 'left' : 'right'}}}>
                             <Typography><CRToolTip/> {monster.challenge_rating}</Typography>
                         </Grid>
-                        <Grid item xs={6} md={2} sx={{display:mouseOnMonster === index ? 'block' : 'none'}}>
+                        <Grid item xs={6} lg={2} sx={{display:mouseOnMonster === index ? 'block' : 'none'}}>
                             <Grow in={mouseOnMonster === index}>
                                 <Button variant="contained" disableElevation onClick={handleViewClick(index)}>
                                     View
                                 </Button>
                             </Grow>
                         </Grid>
-                        <Grid item xs={6} md={1} sx={{textAlign:'right',display:mouseOnMonster === index ? 'block' : 'none'}}>
+                        <Grid item xs={6} lg={1} sx={{textAlign:'right',display:mouseOnMonster === index ? 'block' : 'none'}}>
                             <Grow in={mouseOnMonster === index}>
                                 <Button  sx={{padding:'6px',minWidth:'fit-content'}} color="error" variant="contained" disableElevation onClick={handleRemoveClick(index)} >
                                     <CloseIcon/>
