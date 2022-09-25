@@ -5,11 +5,9 @@ This is app is meant to help Dungeon Masters create combat encounters for the fa
 
 ## Instructions on how to use it:
 1. Enter number of players and levels
-2. App calculates the Encounter threshhold
+2. App calculates the encounter threshhold
 3. Suggest and encounter for your players at their level
-4. Allow user to edit ecounter or build their own based on the app suggesting monsters 
-5. Export encouter as PDF? Or just make it so it can be copied to a doc
-
+4. Allow user to edit the encounter
 ## Technologies Used
 - React
 - Redux
