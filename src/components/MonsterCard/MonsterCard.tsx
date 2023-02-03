@@ -70,7 +70,6 @@ const MonsterCard = () => {
           legendary_actions,
 
         } = monster;
-        console.log(armor_class);
         
   const showMonster = useSelector(showMonsterCard);
   
