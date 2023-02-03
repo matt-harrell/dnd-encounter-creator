@@ -6,6 +6,7 @@ import {
 } from "../../features/MonsterCardSlice";
 import { Grid,Typography,Box,Paper, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { log } from "console";
 
 
 interface profType {
@@ -69,6 +70,8 @@ const MonsterCard = () => {
           legendary_actions,
 
         } = monster;
+        console.log(armor_class);
+        
   const showMonster = useSelector(showMonsterCard);
   
   const handleShowMonsterCard = () => {
@@ -77,7 +80,7 @@ const MonsterCard = () => {
 
     return (
       <div>
-        {showMonster && (
+        {showMonster && 
         <Paper sx={{bgcolor:'secondary.light',padding:3}} elevation={4} id='monsterCard'>
           <Box sx={{textAlign:'right'}}>
             <Button sx={{ padding: '6px', minWidth: 'fit-content' }} color="error" variant="contained" disableElevation onClick={handleShowMonsterCard} >
@@ -93,7 +96,7 @@ const MonsterCard = () => {
           <Grid item xs={12} lg={6} sx={{textAlign:'left'}}>
             
             <Box>
-              <Typography component={'p'} variant={'body1'}>Armor Class:{armor_class}</Typography>
+              <Typography component={'p'} variant={'body1'}>Armor Class:{armor_class[0].value}</Typography>
               <Typography component={'p'} variant={'body1'}>Hit Points:{hit_points} ({hit_dice})</Typography>
               <Typography>Speed:{speedString}</Typography>
             </Box>
@@ -277,7 +280,8 @@ const MonsterCard = () => {
           </Grid>
         </Grid>
         </Paper>
-        )}
+        }
+
       </div>
       
      
