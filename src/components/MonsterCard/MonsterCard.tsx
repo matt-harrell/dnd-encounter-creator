@@ -6,7 +6,6 @@ import {
 } from "../../features/MonsterCardSlice";
 import { Grid,Typography,Box,Paper, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { log } from "console";
 
 
 interface profType {
