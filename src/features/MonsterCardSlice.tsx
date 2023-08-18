@@ -12,9 +12,9 @@ interface profType {
 
 export const loadMonster = createAsyncThunk(
     'MonsterCard/loadMonster',
-   async (searchMonster:string) => {
-        const formatedMonster = searchMonster.replaceAll(' ','-').toLowerCase();
-        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/${formatedMonster}`);
+   async (searchMonsterIndex:string) => {
+        // const formatedMonster = searchMonster.replaceAll(' ','-').toLowerCase();
+        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/${searchMonsterIndex}`);
         const monster = await response.json()
 
         let statMods:(number | string)[] = []
