@@ -12,9 +12,9 @@ interface profType {
 
 export const loadMonster = createAsyncThunk(
     'MonsterCard/loadMonster',
-   async (searchMonster:string) => {
-        const formatedMonster = searchMonster.replaceAll(' ','-').toLowerCase();
-        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/${formatedMonster}`);
+   async (searchMonsterIndex:string) => {
+        // const formatedMonster = searchMonster.replaceAll(' ','-').toLowerCase();
+        const response = await fetch(`https://www.dnd5eapi.co/api/monsters/${searchMonsterIndex}`);
         const monster = await response.json()
 
         let statMods:(number | string)[] = []
@@ -26,37 +26,37 @@ export const loadMonster = createAsyncThunk(
        statMods.push(monster.wisdom) 
        statMods.push(monster.charisma)
 
-       statMods.forEach(stat => {
+       statMods.forEach((stat) => {
         const statPos = statMods.indexOf(stat);
         if (stat === 1 ) {
             statMods[statPos] = '-5'
-        } else if(stat <= 3) {
+        } else if(Number(stat) <= 3) {
             statMods[statPos] = '-4'
-        } else if(stat <= 5) {
+        } else if(Number(stat) <= 5) {
             statMods[statPos] = '-3'
-        } else if(stat <= 7) {
+        } else if(Number(stat) <= 7) {
             statMods[statPos] = '-2'
-        } else if(stat <= 9) {
+        } else if(Number(stat) <= 9) {
             statMods[statPos] = '-1'
-        } else if(stat <= 11) {
+        } else if(Number(stat) <= 11) {
             statMods[statPos] = '0'
-        } else if(stat <= 13) {
+        } else if(Number(stat) <= 13) {
             statMods[statPos] = '+1'
-        } else if(stat <= 15) {
+        } else if(Number(stat) <= 15) {
             statMods[statPos] = '+2'
-        } else if(stat <= 17) {
+        } else if(Number(stat) <= 17) {
             statMods[statPos] = '+3'
-        } else if(stat <= 19) {
+        } else if(Number(stat) <= 19) {
             statMods[statPos] = '+4'
-        } else if(stat <= 21) {
+        } else if(Number(stat) <= 21) {
             statMods[statPos] = '+5'
-        } else if(stat <= 23) {
+        } else if(Number(stat) <= 23) {
             statMods[statPos] = '+6'
-        } else if(stat <= 25) {
+        } else if(Number(stat) <= 25) {
             statMods[statPos] = '+7'
-        } else if(stat <= 27) {
+        } else if(Number(stat) <= 27) {
             statMods[statPos] = '+8'
-        } else if(stat <= 29) {
+        } else if(Number(stat) <= 29) {
             statMods[statPos] = '+9'
         } else {
             statMods[statPos] = '+10'
