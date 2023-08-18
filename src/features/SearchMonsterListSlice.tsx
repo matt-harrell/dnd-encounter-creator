@@ -5,7 +5,10 @@ export const loadMonsterList = createAsyncThunk(
     async () => {
         const response = await fetch('https://www.dnd5eapi.co/api/monsters')
         const monsterListAPI = await response.json();
-        return monsterListAPI.results.map((monster: { name: string; }) => monster.name)
+        return monsterListAPI.results.map((monster: monster) => ({
+          name: monster.name,
+          index:monster.index
+        }));
     }
 )
 
@@ -15,18 +18,29 @@ export const loadMonstersEqualToCR = createAsyncThunk(
         if(challengeRating === 'any'){
             const response = await fetch('https://www.dnd5eapi.co/api/monsters')
             const monsterListAPI = await response.json();
-            return monsterListAPI.results.map((monster: { name: string; }) => monster.name)            
+            return monsterListAPI.results.map((monster: monster) => ({
+                name: monster.name,
+                index:monster.index
+            }));         
         } else{
             const response = await fetch(`https://www.dnd5eapi.co/api/monsters?challenge_rating=${challengeRating}`);
             const matchedMonsterList = await response.json();            
-            return matchedMonsterList.results.map((monster: { name: string; }) => monster.name);
+            return matchedMonsterList.results.map((monster: monster) => ({
+                name: monster.name,
+                index:monster.index
+            }));
         }
          
     }
 )
 
+interface monster{
+    index:string,
+    name:string,
+}
+
 interface monsterListState{
-    monsterListState?:string[] | [],
+    monsterListState?:monster[] | [],
     isMonsterListLoading:boolean,
     failedToLoadMonsterList:boolean,
 }
@@ -69,7 +83,7 @@ export const SearchMonsterListSlice = createSlice({
     }
 })
 
-export const selectSearchMonsterList = (state: { SearchMonsterList: { monsterListState: string[]; }; }) => state.SearchMonsterList.monsterListState;
+export const selectSearchMonsterList = (state: { SearchMonsterList: { monsterListState: monster[]; }; }) => state.SearchMonsterList.monsterListState;
 
 export const selectIsMonsterListLoading = (state: { SearchMonsterList: { isMonsterListLoading: boolean; }; }) => state.SearchMonsterList.isMonsterListLoading;
 export const failedToLoadMonsterList = (state: { failedToLoadMonsterList: boolean; }) => state.failedToLoadMonsterList;
