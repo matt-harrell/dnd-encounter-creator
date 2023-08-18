@@ -19,7 +19,7 @@ const MonsterSearch = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const searchMonsterList = useSelector(selectSearchMonsterList);
-    const [searchedMonster, setSearchedMonster] = useState<string | null>(searchMonsterList[0] || null);
+    const [searchedMonster, setSearchedMonster] = useState<string | null>(null);
     const [inputValue, setInputValue] = useState('');
     const [cRInpit, setCRInput] = useState('');
     const [options, setOptions] = useState<string[]>([]);
@@ -43,7 +43,8 @@ const MonsterSearch = () => {
         }
 
         if (active) {
-            setOptions([...searchMonsterList]);
+            const justMonsterNames = searchMonsterList.map(monster => monster.name)
+            setOptions([...justMonsterNames]);
         }
 
 
@@ -89,9 +90,10 @@ const MonsterSearch = () => {
     }
 
     const handleAddMonsterClick = async () => {
-        if (searchedMonster !== null) {
+        const monsterIndex = searchMonsterList.find(monster => monster.name === searchedMonster)
+        if (monsterIndex !== undefined) {
             try {
-                const monster = await dispatch(loadMonster(searchedMonster)).unwrap();
+                const monster = await dispatch(loadMonster(monsterIndex.index)).unwrap();
                 dispatch(addMonster(monster))
                 dispatch(calcEncoutnerXP(players.length))
 
